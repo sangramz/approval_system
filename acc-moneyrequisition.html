@@ -10,7 +10,7 @@ header('Location: index.html');
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Sales :: Money Requistion</title>
+        <title>Accounts :: Money Requistion</title>
 
         <!-- ========== COMMON STYLES ========== -->
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
@@ -23,12 +23,15 @@ header('Location: index.html');
         <link rel="stylesheet" href="css/icheck/skins/line/blue.css" >
         <link rel="stylesheet" href="css/icheck/skins/line/red.css" >
         <link rel="stylesheet" href="css/icheck/skins/line/green.css" >
+        <link rel="stylesheet" href="css/toastr/toastr.min.css" media="screen" >
+
 
         <!-- ========== THEME CSS ========== -->
         <link rel="stylesheet" href="css/main.css" media="screen" >
 
         <!-- ========== MODERNIZR ========== -->
         <script src="js/modernizr/modernizr.min.js"></script>
+
     </head>
     <body class="top-navbar-fixed">
         <div class="main-wrapper">
@@ -201,12 +204,8 @@ header('Location: index.html');
 
         <!-- ========== THEME JS ========== -->
         <script src="js/main.js"></script>
-        <script>
-            $(function(){
-
-            });
-        </script>
-
+        <script src="js/toastr/toastr.min.js"></script>
+        <?php include 'u/notify.php'; ?>
         <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
     </body>
 </html>

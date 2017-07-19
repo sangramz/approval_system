@@ -1,10 +1,16 @@
+<?php
+session_start();
+if ($_SESSION['access']!== 1 or $_SESSION['access'] == 2) {
+header('Location: index.html');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Sales::Bills & Processing</title>
+        <title>Accounts :: Billing & Process</title>
 
         <!-- ========== COMMON STYLES ========== -->
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
@@ -17,23 +23,26 @@
         <link rel="stylesheet" href="css/icheck/skins/line/blue.css" >
         <link rel="stylesheet" href="css/icheck/skins/line/red.css" >
         <link rel="stylesheet" href="css/icheck/skins/line/green.css" >
+        <link rel="stylesheet" href="css/toastr/toastr.min.css" media="screen" >
+
 
         <!-- ========== THEME CSS ========== -->
         <link rel="stylesheet" href="css/main.css" media="screen" >
 
         <!-- ========== MODERNIZR ========== -->
         <script src="js/modernizr/modernizr.min.js"></script>
+
     </head>
     <body class="top-navbar-fixed">
         <div class="main-wrapper">
 
             <!-- ========== TOP NAVBAR ========== -->
-            <nav class="navbar top-navbar bg-white box-shadow">
+            <nav class="navbar top-navbar bg-black box-shadow">
             	<div class="container-fluid">
                     <div class="row">
                         <div class="navbar-header no-padding">
                 			<a class="navbar-brand" href="index.html">
-                			    <img src="images/logo-dark.svg" alt="Options - Admin Template" class="logo">
+                			    <img src="logo2.png" class="logo">
                 			</a>
                             <span class="small-nav-handle hidden-sm hidden-xs"><i class="fa fa-outdent"></i></span>
                 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
@@ -43,20 +52,23 @@
                             <button type="button" class="navbar-toggle mobile-nav-toggle" >
                 				<i class="fa fa-bars"></i>
                 			</button>
+
                 		</div>
                         <!-- /.navbar-header -->
 
                 		<div class="collapse navbar-collapse" id="navbar-collapse-1">
                 			<ul class="nav navbar-nav" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-
-
+                        <li class=""><a href="#" class="color-danger"><i class="fa fa-user"></i> <?php echo $_SESSION['user']; ?></a></li>
                 			</ul>
                             <!-- /.nav navbar-nav -->
 
                 			<ul class="nav navbar-nav navbar-right" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                <li class="dropdown">
-                					<a href="#" class="dropdown-toggle bg-primary" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> Logout</a>
 
+                        <li>
+                          <a href="home.php" class="dropdown-toggle bg-danger" role="button"><i class="fa fa-home"></i> Back To Admin Home</a>
+                        </li>
+                        <li>
+                				<a href="u/logout.php?logout=1" class="dropdown-toggle bg-primary" role="button"><i class="fa fa-sign-out"></i> Logout</a>
                 				</li>
                                 <!-- /.dropdown -->
 
@@ -72,6 +84,7 @@
             	</div>
             	<!-- /.container-fluid -->
             </nav>
+
 
             <!-- ========== WRAPPER FOR BOTH SIDEBARS & MAIN CONTENT ========== -->
             <div class="content-wrapper">
@@ -101,14 +114,68 @@
 
                     <div class="main-page">
 
-                        <section class="section">
-                            <div class="container-fluid">
+                      <section class="section">
+                          <div class="container-fluid">
+                            <div class="row">
+                              <div class="col-md-9">
+                            <div class="panel">
+                              <div class="panel-heading" style="text-align:center">
+                                <div class="panel-title">
+                                  <h3><b>Billings</b></h3>
+                                </div>
+                              </div>
+                              <div class="panel-body">
+                                <form action="u/req_approv.php?type=billing" method="post">
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                    <label for="dt">Date :</label>
+                                    <input type="date" id="dt" name="ven_dt" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="col-md-8">
+                                    <div class="form-group">
+                                    <label for="vn">Name of the Client:</label>
+                                    <input type="text" id="vn" name="ven_name" class="form-control">
+                                    </div>
+                                  </div>
+                                </div>
 
-                                <!-- /.col-md-offset-3 col-md-6 -->
-                            </div>
-                            <!-- /.container-fluid -->
-                        </section>
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                    <label for="bn">Bill No :</label>
+                                    <input type="text" id="bn" name="ven_bn" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                    <label for="br">Bill Ref :</label>
+                                    <input type="text" id="br" name="ven_br" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                    <label for="amt">Amount :</label>
+                                    <input type="text" id="amt" name="ven_amt" class="form-control">
+                                    </div>
+                                  </div>
+                                </div>
 
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <textarea class="form-control" placeholder="Remarks/Descriptions/Notes..." name="ven_note" rows="7"></textarea>
+                                  </div>
+                                </div>
+                                <input type="submit" value="Request Approval" class="btn btn-success pull-right">
+                              </form>
+
+                              </div>
+                            </div></div></div>
+                              <!-- /.col-md-offset-3 col-md-6 -->
+                          </div>
+                          <!-- /.container-fluid -->
+                      </section>
 
                     </div>
                     <!-- /.main-page -->

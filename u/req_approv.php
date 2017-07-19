@@ -19,8 +19,8 @@ class RequestApproval
        $this->MoneyRequisition($_POST['req_date'], $_POST['req_name'], $_POST['req_purpose'], $_POST['req_amt'], $_POST['req_file']);
        break;
 
-     case '2':
-       echo 'This is 2';
+     case 'vendor_payment':
+       $this->VendorPayment($_POST['ven_dt'], $_POST['ven_name'], $_POST['ven_bn'], $_POST['ven_br'], $_POST['ven_amt'], $_POST['ven_note']);
        break;
 
      default:
@@ -46,12 +46,36 @@ public function MoneyRequisition($dt, $nm, $pur, $amt, $fl)
             '$dt',  '$nm',  '$pur',  '$amt',  '$fl',  'FALSE',  'FALSE',  'FALSE'
             )";
   if ($dbcon->exec($stmt)) {
-    header("Location: ../acc-moneyrequisition.html?updated=true");
+    header("Location: ../acc-moneyrequisition.html?update=req_true");
   } else {
-    header("Location: ../acc-moneyrequisition.html?updated=false");
+    header("Location: ../acc-moneyrequisition.html?update=req_false");
   }
 
 } //End of Money Requisition Request class
+
+public function VendorPayment($dt, $nm, $bn, $br, $amt, $rem)
+{
+  include 'db.php';
+  $stmt = "INSERT INTO  `gmc_approvals`.`accounts_vp` (
+          `vp_dt` ,
+          `vp_name` ,
+          `vp_billno` ,
+          `vp_billref` ,
+          `vp_amt` ,
+          `vp_note` ,
+          `vp_ceo_approv` ,
+          `vp_hod_approv` ,
+          `vp_director`
+          )
+          VALUES (
+          '$dt',  '$nm',  '$bn',  '$br',  '$amt',  '$rem',  'FALSE',  'FALSE',  'FALSE'
+          )";
+    if ($dbcon->exec($stmt)) {
+      header("Location: ../acc-vendorpay.html?update=req_true");
+    } else {
+      header("Location: ../acc-vendorpay.html?update=req_false");
+    }
+}
 
 }
 
