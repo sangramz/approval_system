@@ -23,6 +23,10 @@ class RequestApproval
        $this->VendorPayment($_POST['ven_dt'], $_POST['ven_name'], $_POST['ven_bn'], $_POST['ven_br'], $_POST['ven_amt'], $_POST['ven_note']);
        break;
 
+     case 'billing':
+       $this->Billing($_POST['bl_dt'], $_POST['bl_name'], $_POST['bl_site'], $_POST['bl_bn'], $_POST['bl_amt'], $_POST['bl_note']);
+       break;
+
      default:
        echo "Wrong";
        break;
@@ -75,9 +79,33 @@ public function VendorPayment($dt, $nm, $bn, $br, $amt, $rem)
     } else {
       header("Location: ../acc-vendorpay.html?update=req_false");
     }
+} // End of the Vendor Payment Request Class
+
+public function Billing($dt, $nm, $site, $blno, $amt, $note)
+{
+  include 'db.php';
+  $stmt = "INSERT INTO  `gmc_approvals`.`accounts_bl` (
+          `bl_dt` ,
+          `bl_name` ,
+          `bl_site` ,
+          `bl_no` ,
+          `bi_amt` ,
+          `bl_note` ,
+          `bl_ceo_approv` ,
+          `bl_hod_approv` ,
+          `bl_director_approv`
+          )
+          VALUES (
+          '$dt',  '$nm',  '$site', '$blno',  '$amt',  '$note',  'FALSE',  'FALSE',  'FALSE'
+          )";
+    if ($dbcon->exec($stmt)) {
+      header("Location: ../acc-billsnproc.html?update=req_true");
+    } else {
+      header("Location: ../acc-billsnproc.html?update=req_false");
+    }
 }
 
-}
+}// End of the Whole Class for Request Approval Class
 
 
 ?>

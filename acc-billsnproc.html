@@ -130,13 +130,13 @@ header('Location: index.html');
                                   <div class="col-md-4">
                                     <div class="form-group">
                                     <label for="dt">Date :</label>
-                                    <input type="date" id="dt" name="ven_dt" class="form-control">
+                                    <input type="date" id="dt" name="bl_dt" class="form-control">
                                     </div>
                                   </div>
                                   <div class="col-md-8">
                                     <div class="form-group">
                                     <label for="vn">Name of the Client:</label>
-                                    <input type="text" id="vn" name="ven_name" class="form-control">
+                                    <input type="text" id="vn" name="bl_name" class="form-control">
                                     </div>
                                   </div>
                                 </div>
@@ -144,27 +144,28 @@ header('Location: index.html');
                                 <div class="row">
                                   <div class="col-md-4">
                                     <div class="form-group">
-                                    <label for="bn">Bill No :</label>
-                                    <input type="text" id="bn" name="ven_bn" class="form-control">
+                                    <label for="bn">Site :</label>
+                                    <input type="text" id="bn" name="bl_site" class="form-control">
                                     </div>
                                   </div>
                                   <div class="col-md-4">
                                     <div class="form-group">
-                                    <label for="br">Bill Ref :</label>
-                                    <input type="text" id="br" name="ven_br" class="form-control">
+                                    <label for="bn">Bill No :</label>
+                                    <input type="text" id="bn" name="bl_bn" class="form-control">
                                     </div>
                                   </div>
+
                                   <div class="col-md-4">
                                     <div class="form-group">
                                     <label for="amt">Amount :</label>
-                                    <input type="text" id="amt" name="ven_amt" class="form-control">
+                                    <input type="text" id="amt" name="bl_amt" class="form-control">
                                     </div>
                                   </div>
                                 </div>
 
                                 <div class="row">
                                   <div class="col-md-12">
-                                    <textarea class="form-control" placeholder="Remarks/Descriptions/Notes..." name="ven_note" rows="7"></textarea>
+                                    <textarea class="form-control" placeholder="Remarks/Descriptions/Notes..." name="bl_note" rows="7"></textarea>
                                   </div>
                                 </div>
                                 <input type="submit" value="Request Approval" class="btn btn-success pull-right">
@@ -202,11 +203,10 @@ header('Location: index.html');
 
         <!-- ========== THEME JS ========== -->
         <script src="js/main.js"></script>
-        <script>
-            $(function(){
+        <script src="js/toastr/toastr.min.js"></script>
 
-            });
-        </script>
+        <?php include 'u/notify.php'; ?>
+
 
         <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
     </body>
