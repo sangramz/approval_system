@@ -121,39 +121,22 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 2) {
                                   <div class="panel panel-heading" style="text-align:center"><b>Pending Approvals</b></div>
                                   <div class="panel panel-body">
                                     <table class="table table-bordered">
-                                    <thead>
-                                      <tr>
-                                        <th>#</th>
-                                        <th>Type</th>
-                                        <th>Status</th>
-                                        <th>Details</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                        <td>1</td>
-                                        <td>Money Requistions</td>
-                                        <td>3 Approval Pending</td>
-                                        <td><a href="acc-pa.html?view=money_requisition"><button class="btn btn-primary">Check Requested Approvals</button></a></td>
-                                      </tr>
-                                      <tr>
-                                        <td>2</td>
-                                        <td>Vendor Payment</td>
-                                        <td>3 Approval Pending</td>
-                                        <td><a href="acc-pa.html?view=vendor_payment"><button class="btn btn-primary">Check Requested Approvals</button></a></td>
-                                      </tr>
-                                      <tr>
-                                        <td>3</td>
-                                        <td>Bills & Processing</td>
-                                        <td>3 Approval Pending</td>
-                                        <td><a href="acc-pa.html?view=bills_proc"><button class="btn btn-primary">Check Requested Approvals</button></a></td>
-                                      </tr>
-
-                                    </tbody>
-                                  </table>
+                                     <thead>
+                                       <tr>
+                                         <th>Date</th>
+                                         <th>Requested By</th>
+                                         <th>Amount</th>
+                                         <th>Check Details</th>
+                                       </tr>
+                                     </thead>
+                                     <tbody>
+                                       <?php
+                                       include 'u/view_approvals.php';
+                                       ViewPendApprov($_GET['view']);
+                                       ?>
+                                     </tbody>
+                                   </table>
                                   </div>
-
-
                                 </div>
 
 

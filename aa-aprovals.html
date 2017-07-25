@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['access']) {
+if ($_SESSION['access'] == 1 or $_SESSION['access'] == 2) {
 
 } else {
   header('Location: index.html');
@@ -115,76 +115,103 @@ if ($_SESSION['access']) {
                             <div class="container-fluid">
                               <div class="row">
 
-                                <div class="col-md-7">
 
-                                  <div class="panel panel-primary">
-                                      <div class="panel-heading">
-                                          <div class="panel-title">
-                                              <h5>Plain Panel</h5>
-                                          </div>
-                                      </div>
-                                      <div class="panel-body">
-                                          <b>Date :</b> <br/>
-                                          <b>Requisition Made By :</b> <br/>
-                                          <b>Purpose :</b> <br/>
-                                          <b>Amount :</b> <br/><br/>
+                                <div class="col-md-12">
+                                <div class="panel panel-primary">
+                                  <div class="panel panel-heading" style="text-align:center"><b>Pending Approvals</b></div>
+                                  <div class="panel panel-body">
+                                    <table class="table table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>Type</th>
+                                        <th>Status</th>
+                                        <th>Details</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td>1</td>
+                                        <td>Money Requistions</td>
+                                        <td>3 Approval Pending</td>
+                                        <td><button class="btn btn-primary">Check Requested Approvals</button></td>
+                                      </tr>
+                                      <tr>
+                                        <td>2</td>
+                                        <td>Vendor Payment</td>
+                                        <td>3 Approval Pending</td>
+                                        <td><button class="btn btn-primary">Check Requested Approvals</button></td>
+                                      </tr>
+                                      <tr>
+                                        <td>3</td>
+                                        <td>Bills & Processing</td>
+                                        <td>3 Approval Pending</td>
+                                        <td><button class="btn btn-primary">Check Requested Approvals</button></td>
+                                      </tr>
 
-                                          <div class="panel panel-warning">
-                                              <div class="panel-heading">
-                                                  <div class="panel-title">
-                                                      <h5>Approval Status</h5>
-                                                  </div>
-                                              </div>
-                                              <div class="panel-body">
-                                                <b>Approved by: None</b>
-                                              </div>
-                                          </div>
-                                      </div>
+                                    </tbody>
+                                  </table>
                                   </div>
-                                </div>
-                                <div class="col-md-5">
-
-
 
 
                                 </div>
+
+
+
+                                </div>
+
+
+                                <div class="col-md-12">
+                                </div>
+
+
+
+
                               </div>
+                                <!-- /.col-md-offset-3 col-md-6 -->
                             </div>
-                              <!-- /.container-fluid -->
-                              </section>
+                            <!-- /.container-fluid -->
+                        </section>
 
 
-                              </div>
-                              <!-- /.main-page -->
+                    </div>
+                    <!-- /.main-page -->
 
 
-                              </div>
-                              <!-- /.content-container -->
-                              </div>
-                              <!-- /.content-wrapper -->
+                </div>
+                <!-- /.content-container -->
+            </div>
+            <!-- /.content-wrapper -->
 
-                              </div>
-                              <!-- /.main-wrapper -->
+        </div>
+        <!-- /.main-wrapper -->
 
-                              <!-- ========== COMMON JS FILES ========== -->
-                              <script src="js/jquery/jquery-2.2.4.min.js"></script>
-                              <script src="js/jquery-ui/jquery-ui.min.js"></script>
-                              <script src="js/bootstrap/bootstrap.min.js"></script>
-                              <script src="js/pace/pace.min.js"></script>
-                              <script src="js/lobipanel/lobipanel.min.js"></script>
-                              <script src="js/iscroll/iscroll.js"></script>
+        <!-- ========== COMMON JS FILES ========== -->
+        <script src="js/jquery/jquery-2.2.4.min.js"></script>
+        <script src="js/jquery-ui/jquery-ui.min.js"></script>
+        <script src="js/bootstrap/bootstrap.min.js"></script>
+        <script src="js/pace/pace.min.js"></script>
+        <script src="js/lobipanel/lobipanel.min.js"></script>
+        <script src="js/iscroll/iscroll.js"></script>
 
-                              <!-- ========== PAGE JS FILES ========== -->
-                              <script src="js/prism/prism.js"></script>
+        <!-- ========== PAGE JS FILES ========== -->
+        <script src="js/prism/prism.js"></script>
 
-                              <!-- ========== THEME JS ========== -->
-                              <script src="js/main.js"></script>
-                              <script>
-                              $(function(){
+        <!-- ========== THEME JS ========== -->
+        <script src="js/main.js"></script>
+        <script>
+            $(function(){
 
-                              });
-                              </script>
+            });
+        </script>
+        <!-- ========== JS ========== -->
+        <script>
+          $(function($) {
+              $('#example').DataTable();
+          });
+        </script>
 
-                              <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
-                              </body>
-                              </html>
+
+        <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
+    </body>
+</html>
