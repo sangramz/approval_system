@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['access'] == 1 or $_SESSION['access'] == 2) {
+if ($_SESSION['access'] == 1 or $_SESSION['access'] == 3) {
 
 } else {
   header('Location: index.html');
@@ -12,13 +12,14 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 2) {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Admin :: Home</title>
+        <title>Sales :: Transport</title>
 
         <!-- ========== COMMON STYLES ========== -->
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
         <link rel="stylesheet" href="css/font-awesome.min.css" media="screen" >
         <link rel="stylesheet" href="css/animate-css/animate.min.css" media="screen" >
         <link rel="stylesheet" href="css/lobipanel/lobipanel.min.css" media="screen" >
+        <link rel="stylesheet" href="css/toastr/toastr.min.css" media="screen" >
 
         <!-- ========== PAGE STYLES ========== -->
         <link rel="stylesheet" href="css/prism/prism.css" media="screen" > <!-- USED FOR DEMO HELP - YOU CAN REMOVE IT -->
@@ -63,13 +64,9 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 2) {
 
                 			<ul class="nav navbar-nav navbar-right" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
 
-                        <?php
-                          if ($_SESSION['access']==1) {
-                            echo '<li>
-                              <a href="home.php" class="dropdown-toggle bg-danger" role="button"><i class="fa fa-home"></i> Back To Admin Home</a>
-                            </li>';
-                          }
-                        ?>
+                        <li>
+                          <a href="home.php" class="dropdown-toggle bg-danger" role="button"><i class="fa fa-home"></i> Back To Admin Home</a>
+                        </li>
                         <li>
                 				<a href="u/logout.php?logout=1" class="dropdown-toggle bg-primary" role="button"><i class="fa fa-sign-out"></i> Logout</a>
                 				</li>
@@ -100,10 +97,10 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 2) {
 
                             <div class="sidebar-nav">
                                 <ul class="side-nav color-gray">
-                                  <li class="active"><a href="acc-home.html"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li>
-                                  <li><a href="acc-moneyrequisition.html"><i class="fa fa-credit-card"></i> <span>Money Requisition</span></a></li>
-                                  <li><a href="acc-vendorpay.html"><i class="fa fa-dollar"></i> <span>Vendor Payment</span></a></li>
-                                  <li><a href="acc-billsnproc.html"><i class="fa fa-money"></i> <span>Bills & Processing</span></a></li>
+                                  <li><a href="sales-home.html"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li>
+                                  <li><a href="sales-report.html"><i class="fa fa-shopping-bag"></i> <span>Sales Report</span></a></li>
+                                  <li><a href="sales-transport.html"><i class="fa fa-truck"></i> <span>Transport Expenditures</span></a></li>
+                                  <li><a href="sales-site.html"><i class="fa fa-list-ul"></i> <span>Site Report</span></a></li>
                                 </ul>
 
                             </div>
@@ -120,52 +117,56 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 2) {
                               <div class="row">
 
 
-                                <div class="col-md-12">
-                                <div class="panel panel-primary">
-                                  <div class="panel panel-heading" style="text-align:center"><b>Pending Approvals</b></div>
-                                  <div class="panel panel-body">
-                                    <table class="table table-bordered">
-                                    <thead>
-                                      <tr>
-                                        <th>#</th>
-                                        <th>Type</th>
-                                        <th>Status</th>
-                                        <th>Details</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                        <td>1</td>
-                                        <td>Money Requistions</td>
-                                        <td>3 Approval Pending</td>
-                                        <td><a href="acc-pa.html?view=money_requisition"><button class="btn btn-primary">Check Requested Approvals</button></a></td>
-                                      </tr>
-                                      <tr>
-                                        <td>2</td>
-                                        <td>Vendor Payment</td>
-                                        <td>3 Approval Pending</td>
-                                        <td><a href="acc-pa.html?view=vendor_payment"><button class="btn btn-primary">Check Requested Approvals</button></a></td>
-                                      </tr>
-                                      <tr>
-                                        <td>3</td>
-                                        <td>Bills & Processing</td>
-                                        <td>3 Approval Pending</td>
-                                        <td><a href="acc-pa.html?view=bills_proc"><button class="btn btn-primary">Check Requested Approvals</button></a></td>
-                                      </tr>
-
-                                    </tbody>
-                                  </table>
-                                  </div>
-
-
-                                </div>
 
 
 
-                                </div>
+                                <div class="col-md-9">
+
+                                  <div class="panel">
+                                          <div class="panel-heading" style="text-align:center">
+                                              <div class="panel-title">
+                                                  <h3><b>Tour & Travel Expenditure</b></h3>
+                                              </div>
+                                          </div>
+                                          <div class="panel-body">
+
+                                              <form action="u/req_approv.php?type=sales_transport" method="POST">
+                                                <div class="row">
+                                                  <div class="col-md-6">
+                                                    <div class="form-group">
+                                                      <label for="dt">Bill Date :</label>
+                                                      <input type="date" class="form-control" name="transport_date" id="dt" />
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                    <div class="form-group">
+                                                      <label for="nm">Expenditure Bill #:</label>
+                                                      <input type="text" class="form-control" name="transport_h" id="nm" />
+                                                    </div>
+                                                  </div>
+                                                </div>
 
 
-                                <div class="col-md-12">
+
+                                                <div class="row">
+
+                                                  <div class="col-md-12">
+                                                    <div class="form-group">
+                                                      <label for="amt">Remarks :</label>
+                                                      <textarea class="form-control" name="transport_rem" id="amt" rows="5"></textarea>
+                                                    </div>
+                                                  </div>
+                                                  </div>
+
+                                                <button type="submit" class="btn btn-success pull-right">Submit</button>
+                                              </form>
+
+
+
+                                          </div>
+                                      </div>
+
+
                                 </div>
 
 
@@ -203,18 +204,8 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 2) {
 
         <!-- ========== THEME JS ========== -->
         <script src="js/main.js"></script>
-        <script>
-            $(function(){
-
-            });
-        </script>
-        <!-- ========== JS ========== -->
-        <script>
-          $(function($) {
-              $('#example').DataTable();
-          });
-        </script>
-
+        <script src="js/toastr/toastr.min.js"></script>
+        <?php include 'u/notify.php'; ?>
 
         <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
     </body>

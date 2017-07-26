@@ -66,6 +66,26 @@ function ViewPendApprov($view) {
               }
           break;
 
+          case 'daily_sales':
+            require_once 'db.php';
+            $stmt = $dbcon->prepare("SELECT * FROM sales_dscr WHERE dscr_ceo_approv ='FALSE'");
+            $stmt->execute();
+            $rowCount = $stmt->fetchAll();
+            $nRows = count($rowCount);
+                if ($nRows > 0) {
+                  foreach ($rowCount as $rowData) {
+                     echo "<tr>";
+                     echo "<td>".$rowData['dscr_dt']."</td>";
+                     echo "<td>".$rowData['dscr_h']."</td>";
+                     echo '<td><button class="btn btn-warning" data-toggle="modal" data-target="#va" id="bt_va" data-id="vp'.$rowData['vp_sl'].'"><i class="glyphicon glyphicon-eye-open"></i> View Approval</button></td>';
+                     echo "</tr>";
+                      }
+                }
+                else {
+                  echo '<tr style="text-align:center"><b style="color:red">No Pending Approvals</b></tr>';
+                }
+            break;
+
     default:
       echo 'Cannot Find Any Pending Approvals';
       break;

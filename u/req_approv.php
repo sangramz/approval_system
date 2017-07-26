@@ -27,6 +27,18 @@ class RequestApproval
        $this->Billing($_POST['bl_dt'], $_POST['bl_name'], $_POST['bl_site'], $_POST['bl_bn'], $_POST['bl_amt'], $_POST['bl_note']);
        break;
 
+     case 'dscr':
+       $this->DailySales($_POST['dscr_date'], $_POST['dscr_h'], $_POST['dscr_location'], $_POST['dscr_rem']);
+       break;
+
+     case 'sales_transport':
+       $this->SalesTransport($_POST['transport_date'], $_POST['transport_h'], $_POST['transport_rem']);
+       break;
+
+     case 'site_report':
+       $this->SiteReport($_POST['site_date'], $_POST['site_h'], $_POST['site_loc'], $_POST['site_client'], $_POST['site_rem']);
+       break;
+
      default:
        echo "Wrong";
        break;
@@ -102,6 +114,72 @@ public function Billing($dt, $nm, $site, $blno, $amt, $note)
       header("Location: ../acc-billsnproc.html?update=req_true");
     } else {
       header("Location: ../acc-billsnproc.html?update=req_false");
+    }
+}
+
+public function DailySales($dt, $h, $loc, $rem)
+{
+  include 'db.php';
+  $stmt = "INSERT INTO  `gmc_approvals`.`sales_dscr` (
+          `dscr_dt` ,
+          `dscr_h` ,
+          `dscr_loc` ,
+          `dscr_rem` ,
+          `dscr_hod_approv` ,
+          `dscr_director_approv` ,
+          `dscr_ceo_approv`
+          )
+          VALUES (
+          '$dt',  '$h',  '$loc', '$rem',  'FALSE',  'FALSE',  'FALSE'
+          )";
+    if ($dbcon->exec($stmt)) {
+      header("Location: ../sales-report.html?update=sub_true");
+    } else {
+      header("Location: ../sales-report.html?update=req_false");
+    }
+}
+
+public function SalesTransport($dt, $h, $rem)
+{
+  include 'db.php';
+  $stmt = "INSERT INTO  `gmc_approvals`.`sales_transport` (
+          `transport_dt` ,
+          `transport_h` ,
+          `transport_rem` ,
+          `transport_hod_approv` ,
+          `transport_director_approv` ,
+          `transport_ceo_approv`
+          )
+          VALUES (
+          '$dt',  '$h', '$rem',  'FALSE',  'FALSE',  'FALSE'
+          )";
+    if ($dbcon->exec($stmt)) {
+      header("Location: ../sales-transport.html?update=req_true");
+    } else {
+      header("Location: ../sales-transport.html?update=req_false");
+    }
+}
+
+public function SiteReport($dt, $h, $loc, $client, $rem)
+{
+  include 'db.php';
+  $stmt = "INSERT INTO  `gmc_approvals`.`sales_site` (
+          `site_date` ,
+          `site_h` ,
+          `site_loc` ,
+          `site_client` ,
+          `site_rem` ,
+          `site_hod_approv` ,
+          `site_director_approv` ,
+          `site_ceo_approv`
+          )
+          VALUES (
+          '$dt',  '$h',  '$loc', '$client', '$rem',  'FALSE',  'FALSE',  'FALSE'
+          )";
+    if ($dbcon->exec($stmt)) {
+      header("Location: ../sales-site.html?update=sub_true");
+    } else {
+      header("Location: ../sales-site.html?update=req_false");
     }
 }
 
