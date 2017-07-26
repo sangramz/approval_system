@@ -69,7 +69,7 @@ public function VendorPayment($dt, $nm, $bn, $br, $amt, $rem)
           `vp_note` ,
           `vp_ceo_approv` ,
           `vp_hod_approv` ,
-          `vp_director`
+          `vp_director_approv`
           )
           VALUES (
           '$dt',  '$nm',  '$bn',  '$br',  '$amt',  '$rem',  'FALSE',  'FALSE',  'FALSE'

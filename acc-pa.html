@@ -142,7 +142,27 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 2) {
 
 
                                 </div>
+                                <div id="va" class="modal fade" role="dialog">
+                                  <div class="modal-dialog">
 
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Approval Details</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        <div class="res">
+                                        </div>
+
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
 
                                 <div class="col-md-12">
                                 </div>
@@ -183,16 +203,24 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 2) {
         <!-- ========== THEME JS ========== -->
         <script src="js/main.js"></script>
         <script>
-            $(function(){
 
-            });
+        $(document).ready(function(){
+          $('#va').on('show.bs.modal', function (e) {
+              var rowid = $(e.relatedTarget).data('id');
+              var type = $(e.relatedTarget).data('type');
+              $.ajax({
+                  type : 'post',
+                  url : 'u/view_details.php', //Here you will fetch records
+                  data :  {rowid: rowid}, //Pass $id
+                  success : function(data){
+                  $('.res').html(data);//Show fetched data from database
+                  }
+              });
+           });
+        });
         </script>
         <!-- ========== JS ========== -->
-        <script>
-          $(function($) {
-              $('#example').DataTable();
-          });
-        </script>
+
 
 
         <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
