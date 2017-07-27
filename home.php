@@ -13,7 +13,18 @@ switch ($_SESSION['access']) {
     include 'sales-home.html';
     break;
 
+  case '4':
+    include 'hr-home.html';
+    break;
+
+  case '5':
+    include 'comm-home.html';
+    break;
+
   case '6':
+    include 'hod.html';
+
+  case '7':
     include 'hod.html';
 
   default:

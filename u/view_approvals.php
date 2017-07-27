@@ -77,7 +77,7 @@ function ViewPendApprov($view) {
                      echo "<tr>";
                      echo "<td>".$rowData['dscr_dt']."</td>";
                      echo "<td>".$rowData['dscr_h']."</td>";
-                     echo '<td><button class="btn btn-warning" data-toggle="modal" data-target="#va" id="bt_va" data-id="vp'.$rowData['vp_sl'].'"><i class="glyphicon glyphicon-eye-open"></i> View Approval</button></td>';
+                     echo '<td><button class="btn btn-warning" data-toggle="modal" data-target="#va" id="bt_va" data-id="ds'.$rowData['dscr_sl'].'"><i class="glyphicon glyphicon-eye-open"></i> View Approval</button></td>';
                      echo "</tr>";
                       }
                 }
@@ -85,6 +85,46 @@ function ViewPendApprov($view) {
                   echo '<tr style="text-align:center"><b style="color:red">No Pending Approvals</b></tr>';
                 }
             break;
+
+            case 'transport':
+              require_once 'db.php';
+              $stmt = $dbcon->prepare("SELECT * FROM sales_transport WHERE transport_ceo_approv ='FALSE'");
+              $stmt->execute();
+              $rowCount = $stmt->fetchAll();
+              $nRows = count($rowCount);
+                  if ($nRows > 0) {
+                    foreach ($rowCount as $rowData) {
+                       echo "<tr>";
+                       echo "<td>".$rowData['transport_dt']."</td>";
+                       echo "<td>".$rowData['transport_h']."</td>";
+                       echo '<td><button class="btn btn-warning" data-toggle="modal" data-target="#va" id="bt_va" data-id="te'.$rowData['transport_sl'].'"><i class="glyphicon glyphicon-eye-open"></i> View Approval</button></td>';
+                       echo "</tr>";
+                        }
+                  }
+                  else {
+                    echo '<tr style="text-align:center"><b style="color:red">No Pending Approvals</b></tr>';
+                  }
+              break;
+
+              case 'site':
+                require_once 'db.php';
+                $stmt = $dbcon->prepare("SELECT * FROM sales_site WHERE site_ceo_approv ='FALSE'");
+                $stmt->execute();
+                $rowCount = $stmt->fetchAll();
+                $nRows = count($rowCount);
+                    if ($nRows > 0) {
+                      foreach ($rowCount as $rowData) {
+                         echo "<tr>";
+                         echo "<td>".$rowData['site_date']."</td>";
+                         echo "<td>".$rowData['site_h']."</td>";
+                         echo '<td><button class="btn btn-warning" data-toggle="modal" data-target="#va" id="bt_va" data-id="st'.$rowData['site_sl'].'"><i class="glyphicon glyphicon-eye-open"></i> View Approval</button></td>';
+                         echo "</tr>";
+                          }
+                    }
+                    else {
+                      echo '<tr style="text-align:center"><b style="color:red">No Pending Approvals</b></tr>';
+                    }
+                break;
 
     default:
       echo 'Cannot Find Any Pending Approvals';
