@@ -458,7 +458,7 @@ switch ($type) {
 
                                <b>Location : </b>'.$rowData['site_loc'].' <br/>
                                <b>Client : </b>'.$rowData['site_client'].' <br/><br/>
-                               <b>Remarks : </b>'.$rowData['site_rem'].' 
+                               <b>Remarks : </b>'.$rowData['site_rem'].'
 
 
 
@@ -471,6 +471,166 @@ switch ($type) {
                       echo '<tr style="text-align:center"><b style="color:red">Some Error Occured</b></tr>';
                     }
               break;
+
+              case 're':
+                  $stmt = $dbcon->prepare("SELECT * FROM hr_rec WHERE rec_sl='$id'");
+                  $stmt->execute();
+                  $rowCount = $stmt->fetchAll();
+                  $nRows = count($rowCount);
+                      if ($nRows = 1) {
+                        foreach ($rowCount as $rowData) {
+                          if ($rowData['rec_hod_approv'] == TRUE) {
+                            $hod_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
+                          } else {
+                            $hod_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
+                          }
+                          if ($rowData['rec_director_approv'] == TRUE) {
+                            $direct_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
+                          } else {
+                            $direct_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
+                          }
+                          if ($rowData['rec_ceo_approv'] == TRUE) {
+                            $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
+                          } else {
+                            $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
+                          }
+
+                           echo '<div class="col-sm-4">
+                             <div class="panel border-primary no-border border-3-top">
+                             <div class="panel-heading">
+                                 <div class="panel-title">
+                                     <h5>Status</h5>
+                                 </div>
+                             </div>
+                             <div class="panel-body">
+                                 <div class="row">
+                                     <table class="table table-striped">
+                                       <tbody>
+                                         <tr>
+                                           <th>Hod</th>
+                                           <td>
+                                            '.$hod_approv.'
+                                            </td>
+                                         </tr>
+                                         <tr>
+                                           <th>Director</th>
+                                           <td>
+                                            '.$direct_approv.'
+                                            </td>
+                                         </tr>
+                                         <tr>
+                                           <th>CEO</th>
+                                           <td>
+                                            '.$ceo_approv.'
+                                          </td>
+                                         </tr>
+                                       </tbody>
+                                     </table>
+                                 </div>
+                             </div>
+                         </div>
+                           </div>
+                           <div class="col-sm-7">
+                             <div class="panel panel-primary">
+                               <div class="panel panel-body">
+                                 <b>Date: </b>'.$rowData['rec_dt'].' <br/>
+                                 <b>Post : </b>'.$rowData['rec_name'].' <br/>
+
+                                 <b>No of Post : </b>'.$rowData['rec_h'].' <br/>
+                                 <br/>
+                                 <b>Remarks : </b>'.$rowData['rec_rem'].'
+
+
+
+                               </div>
+                             </div>
+                           </div>';
+                            }
+                      }
+                      else {
+                        echo '<tr style="text-align:center"><b style="color:red">Some Error Occured</b></tr>';
+                      }
+                break;
+
+                case 'le':
+                    $stmt = $dbcon->prepare("SELECT * FROM hr_lev WHERE lev_sl='$id'");
+                    $stmt->execute();
+                    $rowCount = $stmt->fetchAll();
+                    $nRows = count($rowCount);
+                        if ($nRows = 1) {
+                          foreach ($rowCount as $rowData) {
+                            if ($rowData['lev_hod_approv'] == TRUE) {
+                              $hod_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
+                            } else {
+                              $hod_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
+                            }
+                            if ($rowData['lev_director_approv'] == TRUE) {
+                              $direct_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
+                            } else {
+                              $direct_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
+                            }
+                            if ($rowData['lev_ceo_approv'] == TRUE) {
+                              $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
+                            } else {
+                              $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
+                            }
+
+                             echo '<div class="col-sm-4">
+                               <div class="panel border-primary no-border border-3-top">
+                               <div class="panel-heading">
+                                   <div class="panel-title">
+                                       <h5>Status</h5>
+                                   </div>
+                               </div>
+                               <div class="panel-body">
+                                   <div class="row">
+                                       <table class="table table-striped">
+                                         <tbody>
+                                           <tr>
+                                             <th>Hod</th>
+                                             <td>
+                                              '.$hod_approv.'
+                                              </td>
+                                           </tr>
+                                           <tr>
+                                             <th>Director</th>
+                                             <td>
+                                              '.$direct_approv.'
+                                              </td>
+                                           </tr>
+                                           <tr>
+                                             <th>CEO</th>
+                                             <td>
+                                              '.$ceo_approv.'
+                                            </td>
+                                           </tr>
+                                         </tbody>
+                                       </table>
+                                   </div>
+                               </div>
+                           </div>
+                             </div>
+                             <div class="col-sm-7">
+                               <div class="panel panel-primary">
+                                 <div class="panel panel-body">
+                                   <b>Date: </b>'.$rowData['lev_dt'].' <br/>
+                                   <b>Requested By : </b>'.$rowData['lev_name'].' <br/>
+
+                                   <b>No of Days : </b>'.$rowData['lev_no'].' <br/>
+                                   <br/>
+                                   <b>Remarks/Details : </b>'.$rowData['lev_rem'].'
+
+
+
+                                 </div>
+                               </div>
+                             </div>';
+                              }
+                        }
+                        else {
+                          echo '<tr style="text-align:center"><b style="color:red">Some Error Occured</b></tr>';
+                        }
+                  break;
 
   default:
     # code...

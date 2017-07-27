@@ -126,6 +126,46 @@ function ViewPendApprov($view) {
                     }
                 break;
 
+                case 'recruitment':
+                  require_once 'db.php';
+                  $stmt = $dbcon->prepare("SELECT * FROM hr_rec WHERE rec_ceo_approv ='FALSE'");
+                  $stmt->execute();
+                  $rowCount = $stmt->fetchAll();
+                  $nRows = count($rowCount);
+                      if ($nRows > 0) {
+                        foreach ($rowCount as $rowData) {
+                           echo "<tr>";
+                           echo "<td>".$rowData['rec_dt']."</td>";
+                           echo "<td>Recruitment For the Post : ".$rowData['rec_name']."</td>";
+                           echo '<td><button class="btn btn-warning" data-toggle="modal" data-target="#va" id="bt_va" data-id="re'.$rowData['rec_sl'].'"><i class="glyphicon glyphicon-eye-open"></i> View Approval</button></td>';
+                           echo "</tr>";
+                            }
+                      }
+                      else {
+                        echo '<tr style="text-align:center"><b style="color:red">No Pending Approvals</b></tr>';
+                      }
+                  break;
+
+                  case 'leave':
+                    require_once 'db.php';
+                    $stmt = $dbcon->prepare("SELECT * FROM hr_lev WHERE lev_ceo_approv ='FALSE'");
+                    $stmt->execute();
+                    $rowCount = $stmt->fetchAll();
+                    $nRows = count($rowCount);
+                        if ($nRows > 0) {
+                          foreach ($rowCount as $rowData) {
+                             echo "<tr>";
+                             echo "<td>".$rowData['lev_dt']."</td>";
+                             echo "<td>Leave Request by ".$rowData['lev_name']."</td>";
+                             echo '<td><button class="btn btn-warning" data-toggle="modal" data-target="#va" id="bt_va" data-id="le'.$rowData['lev_sl'].'"><i class="glyphicon glyphicon-eye-open"></i> View Approval</button></td>';
+                             echo "</tr>";
+                              }
+                        }
+                        else {
+                          echo '<tr style="text-align:center"><b style="color:red">No Pending Approvals</b></tr>';
+                        }
+                    break;
+
     default:
       echo 'Cannot Find Any Pending Approvals';
       break;

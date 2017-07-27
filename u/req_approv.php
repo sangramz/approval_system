@@ -39,6 +39,14 @@ class RequestApproval
        $this->SiteReport($_POST['site_date'], $_POST['site_h'], $_POST['site_loc'], $_POST['site_client'], $_POST['site_rem']);
        break;
 
+     case 'recruitment':
+       $this->RecApprov($_POST['rec_date'], $_POST['rec_h'], $_POST['rec_name'], $_POST['rec_rem']);
+       break;
+
+     case 'leave':
+       $this->LevApprov($_POST['lev_date'], $_POST['lev_name'], $_POST['lev_no'], $_POST['lev_rem']);
+       break;
+
      default:
        echo "Wrong";
        break;
@@ -180,6 +188,50 @@ public function SiteReport($dt, $h, $loc, $client, $rem)
       header("Location: ../sales-site.html?update=sub_true");
     } else {
       header("Location: ../sales-site.html?update=req_false");
+    }
+}
+
+public function RecApprov($dt, $h, $name, $rem)
+{
+  include 'db.php';
+  $stmt = "INSERT INTO  `gmc_approvals`.`hr_rec` (
+          `rec_dt` ,
+          `rec_h` ,
+          `rec_name` ,
+          `rec_rem` ,
+          `rec_hod_approv` ,
+          `rec_director_approv` ,
+          `rec_ceo_approv`
+          )
+          VALUES (
+          '$dt',  '$h',  '$name', '$rem',  'FALSE',  'FALSE',  'FALSE'
+          )";
+    if ($dbcon->exec($stmt)) {
+      header("Location: ../hr-recruitment.html?update=req_true");
+    } else {
+      header("Location: ../hr-recruitment.html?update=req_false");
+    }
+}
+
+public function LevApprov($dt, $name, $no, $rem)
+{
+  include 'db.php';
+  $stmt = "INSERT INTO  `gmc_approvals`.`hr_lev` (
+          `lev_dt` ,
+          `lev_name` ,
+          `lev_no` ,
+          `lev_rem` ,
+          `lev_hod_approv` ,
+          `lev_director_approv` ,
+          `lev_ceo_approv`
+          )
+          VALUES (
+          '$dt',  '$name',  '$no', '$rem',  'FALSE',  'FALSE',  'FALSE'
+          )";
+    if ($dbcon->exec($stmt)) {
+      header("Location: ../hr-leave.html?update=req_true");
+    } else {
+      header("Location: ../hr-leave.html?update=req_false");
     }
 }
 
