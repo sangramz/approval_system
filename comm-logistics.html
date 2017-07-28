@@ -12,7 +12,7 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 5) {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Vendor Registeration || Commercials </title>
+        <title>Logistics || Commercials </title>
 
         <!-- ========== COMMON STYLES ========== -->
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
@@ -125,33 +125,34 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 5) {
                                   <div class="panel">
                                           <div class="panel-heading" style="text-align:center">
                                               <div class="panel-title">
-                                                  <h3><b>Vendor Registeration</b></h3>
+                                                  <h3><b>Logistics</b></h3>
                                               </div>
                                           </div>
                                           <div class="panel-body">
 
-                                              <form action="u/req_approv.php?type=vendor_registeration" method="POST">
+                                              <form action="u/req_approv.php?type=logistics" method="POST">
                                                 <div class="row">
                                                   <div class="col-md-6">
                                                     <div class="form-group">
-                                                      <label for="vd">Vendor Details :</label>
-                                                      <textarea class="form-control" name="ven_details" id="vd" rows="5"></textarea>
+                                                      <label for="vd">Transporter Details :</label>
+                                                      <textarea class="form-control" name="trans_det" id="vd" rows="5"></textarea>
                                                     </div>
                                                   </div>
                                                   <div class="col-md-6">
                                                     <div class="row">
                                                       <div class="col-md-12">
                                                         <div class="form-group">
-                                                          <label for="vc">Vendor Code :</label>
-                                                          <input type="text" class="form-control" name="ven_code" id="vc" />
+                                                          <label for="vc">Transportation Value:</label>
+                                                          <input type="text" class="form-control" name="trans_val" id="vc" />
                                                         </div>
                                                       </div>
+
                                                       <div class="col-md-12">
                                                         <div class="form-group">
-                                                        <div class="input-group date" data-provide="datepicker">
-                                                          <label for="dt">Date of Registration:</label>
-                                                          <input type="date" class="form-control" name="ven_dt" id="dt" />
-                                                        </div>
+
+                                                          <label for="dt1">Transportation Date:</label>
+                                                          <input type="date" class="form-control" name="trans_dt" id="dt1" />
+
 
                                                         </div>
                                                       </div>
@@ -166,7 +167,7 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 5) {
                                                   <div class="col-md-12">
                                                     <div class="form-group">
                                                       <label for="amt">Remarks :</label>
-                                                      <textarea class="form-control" name="ven_rem" id="amt" rows="5"></textarea>
+                                                      <textarea class="form-control" name="trans_rem" id="amt" rows="5"></textarea>
                                                     </div>
                                                   </div>
                                                   </div>

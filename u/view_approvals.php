@@ -166,6 +166,86 @@ function ViewPendApprov($view) {
                         }
                     break;
 
+                    case 'vendor_registeration':
+                      require_once 'db.php';
+                      $stmt = $dbcon->prepare("SELECT * FROM ven_reg WHERE ven_ceo_approv ='FALSE'");
+                      $stmt->execute();
+                      $rowCount = $stmt->fetchAll();
+                      $nRows = count($rowCount);
+                          if ($nRows > 0) {
+                            foreach ($rowCount as $rowData) {
+                               echo "<tr>";
+                               echo "<td>".$rowData['ven_dt']."</td>";
+                               echo "<td>Vendor Registeration for ".$rowData['ven_code']."</td>";
+                               echo '<td><button class="btn btn-warning" data-toggle="modal" data-target="#va" id="bt_va" data-id="vr'.$rowData['ven_sl'].'"><i class="glyphicon glyphicon-eye-open"></i> View Approval</button></td>';
+                               echo "</tr>";
+                                }
+                          }
+                          else {
+                            echo '<tr style="text-align:center"><b style="color:red">No Pending Approvals</b></tr>';
+                          }
+                      break;
+
+                      case 'po_approvals':
+                        require_once 'db.php';
+                        $stmt = $dbcon->prepare("SELECT * FROM comm_po WHERE po_ceo_approv ='FALSE'");
+                        $stmt->execute();
+                        $rowCount = $stmt->fetchAll();
+                        $nRows = count($rowCount);
+                            if ($nRows > 0) {
+                              foreach ($rowCount as $rowData) {
+                                 echo "<tr>";
+                                 echo "<td>".$rowData['po_dt']."</td>";
+                                 echo "<td>PO Approvals for ".$rowData['po_code']."</td>";
+                                 echo '<td><button class="btn btn-warning" data-toggle="modal" data-target="#va" id="bt_va" data-id="po'.$rowData['po_sl'].'"><i class="glyphicon glyphicon-eye-open"></i> View Approval</button></td>';
+                                 echo "</tr>";
+                                  }
+                            }
+                            else {
+                              echo '<tr style="text-align:center"><b style="color:red">No Pending Approvals</b></tr>';
+                            }
+                        break;
+
+                        case 'logistics':
+                          require_once 'db.php';
+                          $stmt = $dbcon->prepare("SELECT * FROM logistics WHERE trans_ceo_approv ='FALSE'");
+                          $stmt->execute();
+                          $rowCount = $stmt->fetchAll();
+                          $nRows = count($rowCount);
+                              if ($nRows > 0) {
+                                foreach ($rowCount as $rowData) {
+                                   echo "<tr>";
+                                   echo "<td>".$rowData['trans_dt']."</td>";
+                                   echo "<td>Logistics bearing Value ".$rowData['trans_val']."</td>";
+                                   echo '<td><button class="btn btn-warning" data-toggle="modal" data-target="#va" id="bt_va" data-id="lo'.$rowData['trans_sl'].'"><i class="glyphicon glyphicon-eye-open"></i> View Approval</button></td>';
+                                   echo "</tr>";
+                                    }
+                              }
+                              else {
+                                echo '<tr style="text-align:center"><b style="color:red">No Pending Approvals</b></tr>';
+                              }
+                          break;
+
+                          case 'quotation_approval':
+                            require_once 'db.php';
+                            $stmt = $dbcon->prepare("SELECT * FROM quotation WHERE quotation_ceo_approv ='FALSE'");
+                            $stmt->execute();
+                            $rowCount = $stmt->fetchAll();
+                            $nRows = count($rowCount);
+                                if ($nRows > 0) {
+                                  foreach ($rowCount as $rowData) {
+                                     echo "<tr>";
+                                     echo "<td>".$rowData['quotation_dt']."</td>";
+                                     echo "<td>Quotation Approval bearing # ".$rowData['quotation_h']."</td>";
+                                     echo '<td><button class="btn btn-warning" data-toggle="modal" data-target="#va" id="bt_va" data-id="qo'.$rowData['quotation_sl'].'"><i class="glyphicon glyphicon-eye-open"></i> View Approval</button></td>';
+                                     echo "</tr>";
+                                      }
+                                }
+                                else {
+                                  echo '<tr style="text-align:center"><b style="color:red">No Pending Approvals</b></tr>';
+                                }
+                            break;
+
     default:
       echo 'Cannot Find Any Pending Approvals';
       break;

@@ -47,6 +47,22 @@ class RequestApproval
        $this->LevApprov($_POST['lev_date'], $_POST['lev_name'], $_POST['lev_no'], $_POST['lev_rem']);
        break;
 
+     case 'vendor_registeration':
+       $this->venReg($_POST['ven_details'], $_POST['ven_code'], $_POST['ven_dt'], $_POST['ven_rem']);
+       break;
+
+     case 'po_approval':
+       $this->poApprov($_POST['po_det'], $_POST['po_code'], $_POST['po_h'], $_POST['po_dt'], $_POST['po_rem']);
+       break;
+
+     case 'logistics':
+       $this->Logistics($_POST['trans_det'], $_POST['trans_val'], $_POST['trans_dt'], $_POST['trans_rem']);
+       break;
+
+     case 'quotation':
+       $this->quoApprov($_POST['quotation_h'], $_POST['quotation_dt'], $_POST['quotation_det'], $_POST['quotation_rem']);
+       break;
+
      default:
        echo "Wrong";
        break;
@@ -232,6 +248,95 @@ public function LevApprov($dt, $name, $no, $rem)
       header("Location: ../hr-leave.html?update=req_true");
     } else {
       header("Location: ../hr-leave.html?update=req_false");
+    }
+}
+
+public function venReg($det, $code, $dt, $rem)
+{
+  include 'db.php';
+  $stmt = "INSERT INTO  `gmc_approvals`.`ven_reg` (
+          `ven_det` ,
+          `ven_code` ,
+          `ven_dt` ,
+          `ven_rem` ,
+          `ven_hod_approv` ,
+          `ven_director_approv` ,
+          `ven_ceo_approv`
+          )
+          VALUES (
+          '$det',  '$code',  '$dt', '$rem',  'FALSE',  'FALSE',  'FALSE'
+          )";
+    if ($dbcon->exec($stmt)) {
+      header("Location: ../comm-vendor.html?update=req_true");
+    } else {
+      header("Location: ../comm-vendor.html?update=req_false");
+    }
+}
+
+public function poApprov($det, $code, $po_h, $po_dt, $po_rem)
+{
+  include 'db.php';
+  $stmt = "INSERT INTO  `gmc_approvals`.`comm_po` (
+          `po_det` ,
+          `po_code` ,
+          `po_h` ,
+          `po_dt` ,
+          `po_rem` ,
+          `po_hod_approv` ,
+          `po_director_approv` ,
+          `po_ceo_approv`
+          )
+          VALUES (
+          '$det',  '$code', '$po_h',  '$po_dt', '$po_rem',  'FALSE',  'FALSE',  'FALSE'
+          )";
+    if ($dbcon->exec($stmt)) {
+      header("Location: ../comm-poa.html?update=req_true");
+    } else {
+      header("Location: ../comm-poa.html?update=req_false");
+    }
+}
+
+public function Logistics($det, $val, $dt, $rem)
+{
+  include 'db.php';
+  $stmt = "INSERT INTO  `gmc_approvals`.`logistics` (
+          `trans_det` ,
+          `trans_val` ,
+          `trans_dt` ,
+          `trans_rem` ,
+          `trans_hod_approv` ,
+          `trans_director_approv` ,
+          `trans_ceo_approv`
+          )
+          VALUES (
+          '$det',  '$val', '$dt', '$rem',  'FALSE',  'FALSE',  'FALSE'
+          )";
+    if ($dbcon->exec($stmt)) {
+      header("Location: ../comm-logistics.html?update=req_true");
+    } else {
+      header("Location: ../comm-logistics.html?update=req_false");
+    }
+}
+
+public function quoApprov($h, $dt, $det, $rem)
+{
+  include 'db.php';
+  $stmt = "INSERT INTO  `gmc_approvals`.`quotation` (
+          `quotation_h` ,
+          `quotation_dt` ,
+          `quotation_det` ,
+          `quotation_rem` ,
+          `quotation_hod_approv` ,
+          `quotation_director_approv` ,
+          `quotation_ceo_approv`
+          )
+          VALUES (
+          '$h',  '$dt', '$det', '$rem',  'FALSE',  'FALSE',  'FALSE'
+          )";
+    if ($dbcon->exec($stmt)) {
+      header("Location: ../comm-quotation.html?update=req_true");
+    } else {
+      header("Location: ../comm-quotation.html?update=req_false");
     }
 }
 

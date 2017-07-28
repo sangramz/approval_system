@@ -18,7 +18,7 @@ switch ($_SESSION['access']) {
     break;
 
   case '5':
-    include 'comm-home.html';
+    include 'comm-overview.html';
     break;
 
   case '6':

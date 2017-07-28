@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['access'] == 1 or $_SESSION['access'] == 5) {
+if ($_SESSION['access'] == 1 or $_SESSION['access'] == 3) {
 
 } else {
   header('Location: index.html');
@@ -12,15 +12,13 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 5) {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Vendor Registeration || Commercials </title>
+        <title>Sales :: Home</title>
 
         <!-- ========== COMMON STYLES ========== -->
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
         <link rel="stylesheet" href="css/font-awesome.min.css" media="screen" >
         <link rel="stylesheet" href="css/animate-css/animate.min.css" media="screen" >
         <link rel="stylesheet" href="css/lobipanel/lobipanel.min.css" media="screen" >
-        <link rel="stylesheet" href="css/toastr/toastr.min.css" media="screen" >
-
 
         <!-- ========== PAGE STYLES ========== -->
         <link rel="stylesheet" href="css/prism/prism.css" media="screen" > <!-- USED FOR DEMO HELP - YOU CAN REMOVE IT -->
@@ -98,13 +96,10 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 5) {
 
                             <div class="sidebar-nav">
                                 <ul class="side-nav color-gray">
-
-                                  <li><a href="comm-overview.html"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li>
-                                  <li><a href="comm-vendor.html"><i class="fa fa-sign-in"></i> <span>Vendor Registration</span></a></li>
-                                  <li><a href="comm-poa.html"><i class="fa fa-bullhorn"></i> <span>P.O.</span></a></li>
-                                  <li><a href="comm-logistics.html"><i class="fa fa-truck"></i> <span>Logistics</span></a></li>
-                                  <li><a href="comm-quotation.html"><i class="fa fa-bookmark"></i> <span>Quotation</span></a></li>
-
+                                  <li><a href="sales-home.html"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li>
+                                  <li><a href="sales-report.html"><i class="fa fa-shopping-bag"></i> <span>Sales Report</span></a></li>
+                                  <li><a href="sales-transport.html"><i class="fa fa-truck"></i> <span>Transport Expenditures</span></a></li>
+                                  <li><a href="sales-site.html"><i class="fa fa-list-ul"></i> <span>Site Report</span></a></li>
                                 </ul>
 
                             </div>
@@ -120,66 +115,53 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 5) {
                             <div class="container-fluid">
                               <div class="row">
 
-                                <div class="col-md-9">
 
-                                  <div class="panel">
-                                          <div class="panel-heading" style="text-align:center">
-                                              <div class="panel-title">
-                                                  <h3><b>Vendor Registeration</b></h3>
-                                              </div>
-                                          </div>
-                                          <div class="panel-body">
+                                <div class="col-md-12">
+                                <div class="panel panel-primary">
+                                  <div class="panel panel-heading" style="text-align:center"><b>Pending Approvals</b></div>
+                                  <div class="panel panel-body">
+                                    <table class="table table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>Type</th>
+                                        <th>Status</th>
+                                        <th>Details</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td>1</td>
+                                        <td>Daily Sales Report</td>
+                                        <td>3 Approval Pending</td>
+                                        <td><a href="sales-pa.html?view=daily_sales"><button class="btn btn-primary">Check Requested Approvals</button></a></td>
+                                      </tr>
+                                      <tr>
+                                        <td>2</td>
+                                        <td>Transport Expenditure</td>
+                                        <td>3 Approval Pending</td>
+                                        <td><a href="sales-pa.html?view=transport"><button class="btn btn-primary">Check Requested Approvals</button></a></td>
+                                      </tr>
+                                      <tr>
+                                        <td>3</td>
+                                        <td>Site Report</td>
+                                        <td>3 Approval Pending</td>
+                                        <td><a href="sales-pa.html?view=site"><button class="btn btn-primary">Check Requested Approvals</button></a></td>
+                                      </tr>
 
-                                              <form action="u/req_approv.php?type=vendor_registeration" method="POST">
-                                                <div class="row">
-                                                  <div class="col-md-6">
-                                                    <div class="form-group">
-                                                      <label for="vd">Vendor Details :</label>
-                                                      <textarea class="form-control" name="ven_details" id="vd" rows="5"></textarea>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-6">
-                                                    <div class="row">
-                                                      <div class="col-md-12">
-                                                        <div class="form-group">
-                                                          <label for="vc">Vendor Code :</label>
-                                                          <input type="text" class="form-control" name="ven_code" id="vc" />
-                                                        </div>
-                                                      </div>
-                                                      <div class="col-md-12">
-                                                        <div class="form-group">
-                                                        <div class="input-group date" data-provide="datepicker">
-                                                          <label for="dt">Date of Registration:</label>
-                                                          <input type="date" class="form-control" name="ven_dt" id="dt" />
-                                                        </div>
-
-                                                        </div>
-                                                      </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-
+                                    </tbody>
+                                  </table>
+                                  </div>
 
 
-                                                <div class="row">
-
-                                                  <div class="col-md-12">
-                                                    <div class="form-group">
-                                                      <label for="amt">Remarks :</label>
-                                                      <textarea class="form-control" name="ven_rem" id="amt" rows="5"></textarea>
-                                                    </div>
-                                                  </div>
-                                                  </div>
-
-                                                <button type="submit" class="btn btn-success pull-right">Submit</button>
-                                              </form>
+                                </div>
 
 
 
-                                          </div>
-                                      </div>
+                                </div>
 
 
+                                <div class="col-md-12">
                                 </div>
 
 
@@ -212,16 +194,23 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 5) {
         <script src="js/lobipanel/lobipanel.min.js"></script>
         <script src="js/iscroll/iscroll.js"></script>
 
-
         <!-- ========== PAGE JS FILES ========== -->
         <script src="js/prism/prism.js"></script>
 
-
-
         <!-- ========== THEME JS ========== -->
         <script src="js/main.js"></script>
-        <script src="js/toastr/toastr.min.js"></script>
-        <?php include 'u/notify.php'; ?>
+        <script>
+            $(function(){
+
+            });
+        </script>
+        <!-- ========== JS ========== -->
+        <script>
+          $(function($) {
+              $('#example').DataTable();
+          });
+        </script>
+
 
         <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
     </body>
