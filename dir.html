@@ -1,10 +1,11 @@
 <?php
 session_start();
-if ($_SESSION['access'] == 6 or $_SESSION['access'] == 1) {
+if ($_SESSION['access'] == 7 or $_SESSION['access'] == 1) {
 }
 else {
   header('Location: index.html');
 }
+include 'u/countApprov.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,7 @@ else {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>HOD :: Home</title>
+        <title>Director :: Home</title>
 
         <!-- ========== COMMON STYLES ========== -->
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
@@ -83,6 +84,7 @@ else {
             	</div>
             	<!-- /.container-fluid -->
             </nav>
+
             <!-- ========== WRAPPER FOR BOTH SIDEBARS & MAIN CONTENT ========== -->
             <div class="content-wrapper">
                 <div class="content-container">
@@ -95,7 +97,7 @@ else {
 
                             <div class="sidebar-nav">
                                 <ul class="side-nav color-gray">
-                                  <li class="active"><a href="home.php"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li></ul>
+                                  <li class="active"><a href="home.php"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li>
                             </div>
                             <!-- /.sidebar-nav -->
                         </div>
@@ -134,11 +136,11 @@ else {
 
                                                 			<td>
 
-                                                            <a href="hod-pa.html?view=daily_sales"><button class="btn btn-default">Sales Report</button></a>
+                                                            <a href="dir-pa.html?view=daily_sales"><button class="btn btn-default">Sales Report</button></a>
 
-                                                            <a href="hod-pa.html?view=transport"><button class="btn btn-default">Transport Exprenditure</button></a>
+                                                            <a href="dir-pa.html?view=transport"><button class="btn btn-default">Transport Exprenditure</button></a>
 
-                                                            <a href="hod-pa.html?view=site"><button class="btn btn-default">Field Report</button></a>
+                                                            <a href="dir-pa.html?view=site"><button class="btn btn-default">Field Report</button></a>
 
                                                       </td>
                                                 		</tr>
@@ -146,27 +148,27 @@ else {
                                                 			<th scope="row">2</th>
                                                 			<td>Accounts</td>
                                                       <td>
-                                                      <a href="hod-pa.html?view=money_requisition"><button class="btn btn-default">Money Requisition</button></a>
-                                                      <a href="hod-pa.html?view=vendor_payment"><button class="btn btn-default">Vendor Payment</button></a>
-                                                      <a href="hod-pa.html?view=bills_proc"><button class="btn btn-default">Bills & Processing</button></a>
+                                                      <a href="dir-pa.html?view=money_requisition"><button class="btn btn-default">Money Requisition</button></a>
+                                                      <a href="dir-pa.html?view=vendor_payment"><button class="btn btn-default">Vendor Payment</button></a>
+                                                      <a href="dir-pa.html?view=bills_proc"><button class="btn btn-default">Bills & Processing</button></a>
                                                       </td>
                                                 		</tr>
                                                     <tr>
                                                 			<th scope="row">3</th>
                                                 			<td>HR</td>
                                                       <td>
-                                                        <a href="hod-pa.html?view=recruitment"><button class="btn btn-default">Recruitment</button></a>
-                                                        <a href="hod-pa.html?view=leave"><button class="btn btn-default">Leave</button></a>
+                                                        <a href="dir-pa.html?view=recruitment"><button class="btn btn-default">Recruitment</button></a>
+                                                        <a href="dir-pa.html?view=leave"><button class="btn btn-default">Leave</button></a>
                                                       </td>
                                                 		</tr>
                                                     <tr>
                                                 			<th scope="row">4</th>
                                                 			<td>Commercials</td>
                                                       <td>
-                                                        <a href="hod-pa.html?view=vendor_registeration"><button class="btn btn-default">Vendor Registeration</button></a>
-                                                        <a href="hod-pa.html?view=po_approvals"><button class="btn btn-default">PO</button></a>
-                                                        <a href="hod-pa.html?view=logistics"><button class="btn btn-default">Logistics</button></a>
-                                                        <a href="hod-pa.html?view=quotation_approval"><button class="btn btn-default">Quotation</button></a>
+                                                        <a href="dir-pa.html?view=vendor_registeration"><button class="btn btn-default">Vendor Registeration</button></a>
+                                                        <a href="dir-pa.html?view=po_approvals"><button class="btn btn-default">PO</button></a>
+                                                        <a href="dir-pa.html?view=logistics"><button class="btn btn-default">Logistics</button></a>
+                                                        <a href="dir-pa.html?view=quotation_approval"><button class="btn btn-default">Quotation</button></a>
                                                       </td>
                                                 		</tr>
                                                 	</tbody>
@@ -210,11 +212,11 @@ else {
 
                                                   			<td>
 
-                                                              <a href="hod-aa.html?view=daily_sales"><button class="btn btn-default">Sales Report</button></a>
+                                                              <a href="dir-aa.html?view=daily_sales"><button class="btn btn-default">Sales Report</button></a>
 
-                                                              <a href="hod-aa.html?view=transport"><button class="btn btn-default">Transport Exprenditure</button></a>
+                                                              <a href="dir-aa.html?view=transport"><button class="btn btn-default">Transport Exprenditure</button></a>
 
-                                                              <a href="hod-aa.html?view=site"><button class="btn btn-default">Field Report</button></a>
+                                                              <a href="dir-aa.html?view=site"><button class="btn btn-default">Field Report</button></a>
 
                                                         </td>
                                                   		</tr>
@@ -222,27 +224,27 @@ else {
                                                   			<th scope="row">2</th>
                                                   			<td>Accounts</td>
                                                         <td>
-                                                        <a href="hod-aa.html?view=money_requisition"><button class="btn btn-default">Money Requisition</button></a>
-                                                        <a href="hod-aa.html?view=vendor_payment"><button class="btn btn-default">Vendor Payment</button></a>
-                                                        <a href="hod-aa.html?view=bills_proc"><button class="btn btn-default">Bills & Processing</button></a>
+                                                        <a href="dir-aa.html?view=money_requisition"><button class="btn btn-default">Money Requisition</button></a>
+                                                        <a href="dir-aa.html?view=vendor_payment"><button class="btn btn-default">Vendor Payment</button></a>
+                                                        <a href="dir-aa.html?view=bills_proc"><button class="btn btn-default">Bills & Processing</button></a>
                                                         </td>
                                                   		</tr>
                                                       <tr>
                                                   			<th scope="row">3</th>
                                                   			<td>HR</td>
                                                         <td>
-                                                          <a href="hod-aa.html?view=recruitment"><button class="btn btn-default">Recruitment</button></a>
-                                                          <a href="hod-aa.html?view=leave"><button class="btn btn-default">Leave</button></a>
+                                                          <a href="dir-aa.html?view=recruitment"><button class="btn btn-default">Recruitment</button></a>
+                                                          <a href="dir-aa.html?view=leave"><button class="btn btn-default">Leave</button></a>
                                                         </td>
                                                   		</tr>
                                                       <tr>
                                                   			<th scope="row">4</th>
                                                   			<td>Commercials</td>
                                                         <td>
-                                                          <a href="hod-aa.html?view=vendor_registeration"><button class="btn btn-default">Vendor Registeration</button></a>
-                                                          <a href="hod-aa.html?view=po_approvals"><button class="btn btn-default">PO</button></a>
-                                                          <a href="hod-aa.html?view=logistics"><button class="btn btn-default">Logistics</button></a>
-                                                          <a href="hod-aa.html?view=quotation_approval"><button class="btn btn-default">Quotation</button></a>
+                                                          <a href="dir-aa.html?view=vendor_registeration"><button class="btn btn-default">Vendor Registeration</button></a>
+                                                          <a href="dir-aa.html?view=po_approvals"><button class="btn btn-default">PO</button></a>
+                                                          <a href="dir-aa.html?view=logistics"><button class="btn btn-default">Logistics</button></a>
+                                                          <a href="dir-aa.html?view=quotation_approval"><button class="btn btn-default">Quotation</button></a>
                                                         </td>
                                                   		</tr>
                                                   	</tbody>
@@ -261,7 +263,10 @@ else {
 
 
                     </div>
-      </div>
+                    <!-- /.main-page -->
+
+
+                </div>
                 <!-- /.content-container -->
             </div>
             <!-- /.content-wrapper -->

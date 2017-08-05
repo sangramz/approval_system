@@ -1,7 +1,9 @@
 <?php
 session_start();
-if ($_SESSION['access']!== 1 or $_SESSION['access'] == 2) {
-header('Location: index.html');
+if ($_SESSION['access'] == 7 or $_SESSION['access'] == 1) {
+}
+else {
+  header('Location: index.html');
 }
 ?>
 <!DOCTYPE html>
@@ -10,7 +12,7 @@ header('Location: index.html');
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Accounts :: Money Requistion</title>
+        <title>Pending Approvals :: Director</title>
 
         <!-- ========== COMMON STYLES ========== -->
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
@@ -31,7 +33,6 @@ header('Location: index.html');
 
         <!-- ========== MODERNIZR ========== -->
         <script src="js/modernizr/modernizr.min.js"></script>
-
     </head>
     <body class="top-navbar-fixed">
         <div class="main-wrapper">
@@ -97,13 +98,7 @@ header('Location: index.html');
 
                             <div class="sidebar-nav">
                                 <ul class="side-nav color-gray">
-
-                                  <li><a href="acc-home.html"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li>
-                                  <li class="active"><a href="acc-moneyrequisition.html"><i class="fa fa-credit-card"></i> <span>Money Requisition</span></a></li>
-                                  <li><a href="acc-vendorpay.html"><i class="fa fa-dollar"></i> <span>Vendor Payment</span></a></li>
-                                  <li><a href="acc-billsnproc.html"><i class="fa fa-money"></i> <span>Bills & Processing</span></a></li>
-                                </ul>
-
+                                  <li class="active"><a href="acc-home.html"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li>
                             </div>
                             <!-- /.sidebar-nav -->
                         </div>
@@ -112,71 +107,68 @@ header('Location: index.html');
                     <!-- /.left-sidebar -->
 
                     <div class="main-page">
+                      <section class="section">
+                        <div class="container-fluid">
+                          <div class="row">
+                              <div class="col-md-12">
+                              <div class="panel panel-primary">
+                                <div class="panel panel-heading" style="text-align:center"><b>Pending Approvals</b></div>
+                                <div class="panel panel-body">
+                                  <table class="table table-bordered">
+                                  <thead>
+                                    <tr>
 
-                        <section class="section">
-                            <div class="container-fluid">
-                              <div class="row">
-                                <div class="col-md-9">
+                                      <th>Date</th>
+                                      <th>#</th>
+                                      <th>Details</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <?php
+                                    include 'u/dir_approver_view.php';
+                                    ViewPendApprov($_GET['view']);
+                                    ?>
 
-                                  <div class="panel">
-                                          <div class="panel-heading" style="text-align:center">
-                                              <div class="panel-title">
-                                                  <h3><b>Money Requisition</b></h3>
-                                              </div>
-                                          </div>
-                                          <div class="panel-body">
-
-                                              <form action="u/req_approv.php?type=money_requisition" method="POST">
-                                                <div class="row">
-                                                  <div class="col-md-6">
-                                                    <div class="form-group">
-                                                      <label for="dt">Date :</label>
-                                                      <input type="date" class="form-control" name="req_date" id="dt" />
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-6">
-                                                    <div class="form-group">
-                                                      <label for="nm">Requisition Made By:</label>
-                                                      <input type="text" class="form-control" name="req_name" id="nm" />
-                                                    </div>
-                                                  </div>
-                                                </div>
-
-
-
-                                                <div class="row">
-                                                  <div class="col-md-9">
-                                                    <div class="form-group">
-                                                      <label for="pur">Purpose :</label>
-                                                      <textarea class="form-control" name="req_purpose" id="pur" rows="5"></textarea>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-3">
-                                                    <div class="form-group">
-                                                      <label for="amt">Amount :</label>
-                                                      <textarea class="form-control" name="req_amt" id="amt" rows="5"></textarea>
-                                                    </div>
-                                                  </div>
-                                                  </div>
-
-                                                  <label for="fl">Attach a Document(Optional) :</label>
-                                                  <input type="file" class="form-control" name="req_file" id="fl"/></br><br><br>
-                                                <button type="submit" class="btn btn-success pull-right">Request Approval</button>
-                                              </form>
-
-
-
-                                          </div>
-                                      </div>
-
-
+                                  </tbody>
+                                </table>
                                 </div>
                               </div>
 
-                                <!-- /.col-md-offset-3 col-md-6 -->
+
+                            <div id="va" class="modal fade" role="dialog">
+                              <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Approval Details</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <div class="res">
+                                    </div>
+
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+
+                              </div>
                             </div>
-                            <!-- /.container-fluid -->
-                        </section>
+
+
+                            <div class="col-md-12">
+                            </div>
+
+
+
+
+                          </div>
+                            <!-- /.col-md-offset-3 col-md-6 -->
+                        </div>
+                        <!-- /.container-fluid -->
+                    </section>
 
 
                     </div>
@@ -201,11 +193,29 @@ header('Location: index.html');
 
         <!-- ========== PAGE JS FILES ========== -->
         <script src="js/prism/prism.js"></script>
+        <script src="js/toastr/toastr.min.js"></script>
+
 
         <!-- ========== THEME JS ========== -->
         <script src="js/main.js"></script>
-        <script src="js/toastr/toastr.min.js"></script>
+        <script>
+
+        $(document).ready(function(){
+          $('#va').on('show.bs.modal', function (e) {
+              var rowid = $(e.relatedTarget).data('id');
+              $.ajax({
+                  type : 'post',
+                  url : 'u/dir_show_approvals.php', //Here you will fetch records
+                  data :  {rowid: rowid}, //Pass $id
+                  success : function(data){
+                  $('.res').html(data);//Show fetched data from database
+                  }
+              });
+           });
+        });
+        </script>
         <?php include 'u/notify.php'; ?>
+
         <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
     </body>
 </html>

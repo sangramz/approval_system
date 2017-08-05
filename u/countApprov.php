@@ -1,121 +1,176 @@
 <?php
 
-/**
- * For counting the number of rows
- * $type is the table type
- * $status is the approval type "pending" or "Active"
- * $approv is the specific designation for approving "ceo" or "HOD"
- */
+echo countpend('mr', 'hod');
+echo ountpend('vp', 'ceo');
+function countpend($tab, $approver) {
+  require_once 'db.php';
+  switch ($tab) {
+    case 'mr':
+        if ($approver == 'ceo') {
+          $approv = 'ceo_approv';
+          $tab_name = 'mr';
+        } elseif ($approver == 'hod') {
+          $approv = 'hod_approv';
+          $tab_name = 'mr';
+        } elseif ($approver == 'dir') {
+          $approv = 'direct_approv';
+          $tab_name = 'mr';
+        }
+      break;
 
-class ApprovalCount
-{
+    case 'vp':
+        if ($approver == 'ceo') {
+          $approv = 'vp_ceo_approv';
+          $tab_name = 'accounts_vp';
+        } elseif ($approver == 'hod') {
+          $approv = 'vp_hod_approv';
+          $tab_name = 'accounts_vp';
+        } elseif ($approver == 'dir') {
+          $approv = 'vp_director_approv';
+          $tab_name = 'accounts_vp';
+        }
+      break;
 
-  function __construct($type, $approv, $status)
-  {
-    switch ($type) {
-      case 'mr':
-        $reqType = "Money Requisition";
-        $dept = "Accounts";
-        break;
+    case 'bl':
+        if ($approver == 'ceo') {
+          $approv = 'bl_ceo_approv';
+          $tab_name = 'accounts_bl';
+        } elseif ($approver == 'hod') {
+          $approv = 'bl_hod_approv';
+          $tab_name = 'accounts_bl';
+        } elseif ($approver == 'dir') {
+          $approv = 'bl_director_approv';
+          $tab_name = 'accounts_bl';
+        }
+      break;
 
-      case 'account_vp':
-        $reqType = "Vendor Payment";
-        $dept = 'Accounts';
-        break;
 
-      case 'account_bl':
-        $reqType = "Billings & Process";
-        $dept = 'Accounts';
-        break;
+    case 'dscr':
+        if ($approver == 'ceo') {
+          $approv = 'dscr_ceo_approv';
+          $tab_name = 'sales_dscr';
+        } elseif ($approver == 'hod') {
+          $approv = 'dscr_hod_approv';
+          $tab_name = 'sales_dscr';
+        } elseif ($approver == 'dir') {
+          $approv = 'dscr_director_approv';
+          $tab_name = 'sales_dscr';
+        }
+      break;
 
-      case 'comm_po':
-        $reqType = "PO";
-        $dept = 'Commercials';
-        break;
+    case 'site':
+        if ($approver == 'ceo') {
+          $approv = 'site_ceo_approv';
+          $tab_name = 'sales_site';
+        } elseif ($approver == 'hod') {
+          $approv = 'site_hod_approv';
+          $tab_name = 'sales_site';
+        } elseif ($approver == 'dir') {
+          $approv = 'site_director_approv';
+          $tab_name = 'sales_site';
+        }
+      break;
 
-      case 'hr_lev':
-        $reqType = "Leave";
-        $dept = 'HR';
-        break;
+    case 'transport':
+        if ($approver == 'ceo') {
+          $approv = 'transport_ceo_approv';
+          $tab_name = 'sales_transport';
+        } elseif ($approver == 'hod') {
+          $approv = 'transport_hod_approv';
+          $tab_name = 'sales_transport';
+        } elseif ($approver == 'dir') {
+          $approv = 'transport_director_approv';
+          $tab_name = 'sales_transport';
+        }
+      break;
 
-      case 'hr_rec':
-        $reqType = "Recruitment";
-        $dept = 'HR';
-        break;
+    case 'rec':
+        if ($approver == 'ceo') {
+          $approv = 'rec_ceo_approv';
+          $tab_name = 'hr_rec';
+        } elseif ($approver == 'hod') {
+          $approv = 'rec_hod_approv';
+          $tab_name = 'hr_rec';
+        } elseif ($approver == 'dir') {
+          $approv = 'rec_director_approv';
+          $tab_name = 'hr_rec';
+        }
+      break;
 
-      case 'logistics':
-        $reqType = "Logistics";
-        $dept = 'Commercials';
-        break;
+    case 'lev':
+        if ($approver == 'ceo') {
+          $approv = 'lev_ceo_approv';
+          $tab_name = 'hr_lev';
+        } elseif ($approver == 'hod') {
+          $approv = 'lev_hod_approv';
+          $tab_name = 'hr_lev';
+        } elseif ($approver == 'dir') {
+          $approv = 'lev_director_approv';
+          $tab_name = 'hr_lev';
+        }
+      break;
 
-      case 'quotation':
-        $reqType = "Quotation";
-        $dept = 'Commercials';
-        break;
+    case 'ven':
+        if ($approver == 'ceo') {
+          $approv = 'ven_ceo_approv';
+          $tab_name = 'ven_reg';
+        } elseif ($approver == 'hod') {
+          $approv = 'ven_hod_approv';
+          $tab_name = 'ven_reg';
+        } elseif ($approver == 'dir') {
+          $approv = 'ven_director_approv';
+          $tab_name = 'ven_reg';
+        }
+      break;
 
-      case 'sales_dscr':
-        $reqType = "Daily Sales Call Report";
-        $dept = 'Sales';
-        break;
+    case 'po':
+        if ($approver == 'ceo') {
+          $approv = 'po_ceo_approv';
+          $tab_name = 'comm_po';
+        } elseif ($approver == 'hod') {
+          $approv = 'po_hod_approv';
+          $tab_name = 'comm_po';
+        } elseif ($approver == 'dir') {
+          $approv = 'po_director_approv';
+          $tab_name = 'comm_po';
+        }
+      break;
 
-      case 'sales_site':
-        $reqType = "Filed Report";
-        $dept = 'Sales';
-        break;
+    case 'log':
+        if ($approver == 'ceo') {
+          $approv = 'trans_ceo_approv';
+          $tab_name = 'logistics';
+        } elseif ($approver == 'hod') {
+          $approv = 'trans_hod_approv';
+          $tab_name = 'logistics';
+        } elseif ($approver == 'dir') {
+          $approv = 'trans_director_approv';
+          $tab_name = 'logistics';
+        }
+      break;
 
-      case 'sales_transport':
-        $reqType = "Tour & Travel Expenditure";
-        $dept = 'Sales';
-        break;
+    case 'quo':
+        if ($approver == 'ceo') {
+          $approv = 'quotation_ceo_approv';
+          $tab_name = 'quotation';
+        } elseif ($approver == 'hod') {
+          $approv = 'quotation_hod_approv';
+          $tab_name = 'quotation';
+        } elseif ($approver == 'dir') {
+          $approv = 'quotation_director_approv';
+          $tab_name = 'quotation';
+        }
+      break;
 
-      case 'ven_reg':
-        $reqType = "Vendor Registeration";
-        $dept = 'Sales';
-        break;
-
-      default:
-        echo 'None';
-        break;
-    }
-    if ($status == 'pending') {
-      $this->countPend($type, $approv, $reqType);
-    } elseif ($status == 'active') {
-      $this->countActive($type, $approv);
-    } else {
-      echo 'Error in retriving number of approvals';
-    }
+    default:
+      echo "nope";
+      break;
+  }
+  $stmt = $dbcon->prepare("SELECT COUNT($approv) FROM $tab_name WHERE $approv='0'");
+  $nrows = $stmt->execute();
+  if ($nrows > 0) {
+    return $nrows;
   }
 
-  public function countPend($type, $approv, $reqType)
-  {
-    include 'db.php';
-    $stmt = $dbcon->prepare("SELECT * FROM $type WHERE $approv='FALSE'");
-    $stmt -> execute();
-    $noRows=$stmt->rowCount();
-    if ($noRows > 0) {
-      echo $noRows.' '.$reqType.' Approvals are pending !!!';
-    } else {
-      echo 'None';
-    }
-
-  }
-  public function countActive($type, $approv, $reqType)
-  {
-    include 'db.php';
-    $stmt = $dbcon->prepare("SELECT * FROM '$type' WHERE '$approv'='TRUE'");
-    $stmt -> execute();
-    $noRows=$stmt->rowCount();
-    if ($noRows > 0) {
-      echo $noRows.' '.$reqType.' Approvals Have Been Approved !!!';
-    } else {
-      echo 'None';
-    }
-
-
-  }
 }
-
-/**
- * Counts a Specific Number of Approvals
- */
 ?>

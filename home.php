@@ -25,10 +25,10 @@ switch ($_SESSION['access']) {
     include 'hod.html';
 
   case '7':
-    include 'hod.html';
+    include 'dir.html';
 
   default:
-    echo 'error';
+    header("Location: index.html");
     break;
 }
 ?>

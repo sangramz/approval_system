@@ -78,6 +78,57 @@
         </script>';
         break;
 
+        case 'approved':
+          echo '<script>
+              $(function(){
+                  toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-center",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "500",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                  }
+                  toastr["success"]("The Request has been approved by You");
+
+              });
+          </script>';
+          break;
+
+          case 'notapproved':
+            echo '<script>
+                $(function(){
+                    toastr.options = {
+                      "closeButton": true,
+                      "debug": false,
+                      "newestOnTop": false,
+                      "progressBar": false,
+                      "positionClass": "toast-top-center",
+                      "preventDuplicates": false,
+                      "onclick": null,
+                      "showDuration": "500",
+                      "hideDuration": "1000",
+                      "timeOut": "5000",
+                      "extendedTimeOut": "1000",
+                      "showEasing": "swing",
+                      "hideEasing": "linear",
+                      "showMethod": "fadeIn",
+                      "hideMethod": "fadeOut"
+                    }
+                    toastr["warning"]("The Request can not be approved");
+
+                });
+            </script>';
+            break;
     default:
       # code...
       break;

@@ -1,9 +1,7 @@
 <?php
 session_start();
-if ($_SESSION['access'] == 6 or $_SESSION['access'] == 1) {
-}
-else {
-  header('Location: index.html');
+if ($_SESSION['access']!== 1) {
+header('Location: index.html');
 }
 ?>
 <!DOCTYPE html>
@@ -12,7 +10,7 @@ else {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>HOD :: Home</title>
+        <title>Admin :: Home</title>
 
         <!-- ========== COMMON STYLES ========== -->
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
@@ -25,8 +23,6 @@ else {
         <link rel="stylesheet" href="css/icheck/skins/line/blue.css" >
         <link rel="stylesheet" href="css/icheck/skins/line/red.css" >
         <link rel="stylesheet" href="css/icheck/skins/line/green.css" >
-        <link rel="stylesheet" href="css/toastr/toastr.min.css" media="screen" >
-
 
         <!-- ========== THEME CSS ========== -->
         <link rel="stylesheet" href="css/main.css" media="screen" >
@@ -64,10 +60,6 @@ else {
                             <!-- /.nav navbar-nav -->
 
                 			<ul class="nav navbar-nav navbar-right" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-
-                        <li>
-                          <a href="home.php" class="dropdown-toggle bg-danger" role="button"><i class="fa fa-home"></i> Back To Admin Home</a>
-                        </li>
                         <li>
                 				<a href="u/logout.php?logout=1" class="dropdown-toggle bg-primary" role="button"><i class="fa fa-sign-out"></i> Logout</a>
                 				</li>
@@ -98,7 +90,50 @@ else {
 
                             <div class="sidebar-nav">
                                 <ul class="side-nav color-gray">
-                                  <li class="active"><a href="acc-home.html"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li>
+                                  <li><a href="home.php"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li>
+
+                                  <li class="has-children">
+                                      <a href="#"><i class="fa fa-money"></i> <span>Accounts</span> <i class="fa fa-angle-right arrow"></i></a>
+                                      <ul class="child-nav" style="display: none;">
+                                        <li class="active"><a href="acc-home.html"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li>
+                                        <li><a href="acc-moneyrequisition.html"><i class="fa fa-credit-card"></i> <span>Money Requisition</span></a></li>
+                                        <li><a href="acc-vendorpay.html"><i class="fa fa-inr"></i> <span>Vendor Payment</span></a></li>
+                                        <li><a href="acc-billsnproc.html"><i class="fa fa-money"></i> <span>Bills & Processing</span></a></li>
+                                      </ul>
+                                  </li>
+                                  <li class="has-children">
+                                      <a href="#"><i class="fa fa-money"></i> <span>Sales</span> <i class="fa fa-angle-right arrow"></i></a>
+                                      <ul class="child-nav" style="display: none;">
+                                        <li><a href="sales-home.html"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li>
+                                        <li><a href="sales-report.html"><i class="fa fa-shopping-bag"></i> <span>Sales Report</span></a></li>
+                                        <li><a href="sales-transport.html"><i class="fa fa-truck"></i> <span>Transport</span></a></li>
+                                        <li><a href="sales-site.html"><i class="fa fa-list-ul"></i> <span>field-report</span></a></li>
+                                      </ul>
+                                  </li>
+                                  <li class="has-children">
+                                      <a href="#"><i class="fa fa-money"></i> <span>HR</span> <i class="fa fa-angle-right arrow"></i></a>
+                                      <ul class="child-nav" style="display: none;">
+                                        <li><a href="hr-home.html"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li>
+                                        <li><a href="hr-recruitment.html"><i class="fa fa-user"></i> <span>Recruitment</span></a></li>
+                                        <li><a href="hr-leave.html"><i class="fa fa-plane"></i> <span>Leave</span></a></li>
+                                      </ul>
+                                  </li>
+                                  <li class="has-children">
+                                      <a href="#"><i class="fa fa-money"></i> <span>Commerce</span> <i class="fa fa-angle-right arrow"></i></a>
+                                      <ul class="child-nav" style="display: none;">
+                                        <li><a href="comm-overview.html"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li>
+                                        <li><a href="comm-vendor.html"><i class="fa fa-sign-in"></i> <span>Vendor Registration</span></a></li>
+                                        <li><a href="comm-poa.html"><i class="fa fa-bullhorn"></i> <span>P.O.</span></a></li>
+                                        <li><a href="comm-logistics.html"><i class="fa fa-truck"></i> <span>Logistics</span></a></li>
+                                      </ul>
+                                  </li>
+                                  <li><a href="sales-billsnproc.html"><i class="fa fa-money"></i> <span>Details</span></a></li>
+                                  <li><a href="hod.html"><i class="fa fa-user"></i> <span>HOD</span></a></li>
+                                  <li><a href="dir.html"><i class="fa fa-user"></i> <span>Director</span></a></li>
+
+
+                                </ul>
+
                             </div>
                             <!-- /.sidebar-nav -->
                         </div>
@@ -125,7 +160,7 @@ else {
                                   </thead>
                                   <tbody>
                                     <?php
-                                    include 'u/hod_approver_view.php';
+                                    include 'u/ceo_approver_view.php';
                                     ViewPendApprov($_GET['view']);
                                     ?>
 
@@ -193,8 +228,6 @@ else {
 
         <!-- ========== PAGE JS FILES ========== -->
         <script src="js/prism/prism.js"></script>
-        <script src="js/toastr/toastr.min.js"></script>
-
 
         <!-- ========== THEME JS ========== -->
         <script src="js/main.js"></script>
@@ -205,7 +238,7 @@ else {
               var rowid = $(e.relatedTarget).data('id');
               $.ajax({
                   type : 'post',
-                  url : 'u/hod_show_approvals.php', //Here you will fetch records
+                  url : 'u/ceo_show_approvals.php', //Here you will fetch records
                   data :  {rowid: rowid}, //Pass $id
                   success : function(data){
                   $('.res').html(data);//Show fetched data from database
@@ -215,7 +248,6 @@ else {
         });
         </script>
         <?php include 'u/notify.php'; ?>
-
         <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->
     </body>
 </html>

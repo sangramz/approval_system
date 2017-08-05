@@ -90,7 +90,7 @@ header('Location: index.html');
 
                             <div class="sidebar-nav">
                                 <ul class="side-nav color-gray">
-                                  <li><a href="ceo.html"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li>
+                                  <li><a href="home.php"><i class="fa fa-dashboard"></i> <span>Overview</span></a></li>
 
                                   <li class="has-children">
                                       <a href="#"><i class="fa fa-money"></i> <span>Accounts</span> <i class="fa fa-angle-right arrow"></i></a>
@@ -129,7 +129,7 @@ header('Location: index.html');
                                   </li>
                                   <li><a href="sales-billsnproc.html"><i class="fa fa-money"></i> <span>Details</span></a></li>
                                   <li><a href="hod.html"><i class="fa fa-user"></i> <span>HOD</span></a></li>
-                                  <li><a href="director.html"><i class="fa fa-user"></i> <span>Director</span></a></li>
+                                  <li><a href="dir.html"><i class="fa fa-user"></i> <span>Director</span></a></li>
 
 
                                 </ul>
@@ -143,52 +143,159 @@ header('Location: index.html');
 
                     <div class="main-page">
 
-                        <section class="section">
-                            <div class="container-fluid">
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <div class="panel panel-primary">
-                                    <div class="panel panel-heading">Pending Approvals from Accounts</div>
-                                    <div class="panel panel-body">
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="panel panel-danger">
-                                    <div class="panel panel-heading">Approvals Status for Accounts</div>
-                                    <div class="panel panel-body">
-                                    </div>
-                                  </div>
-                                </div>
+                      <section class="section">
+                          <div class="container-fluid">
+                            <div class="row">
+
+                                  <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
+                                  <div class="col-sm-10">
+                                  <div class="panel panel-info">
+                                          <div class="panel-heading">
+                                              <div class="panel-title">
+                                                  <h4 style="text-align:center">Pending Approvals</h4>
+                                              </div>
+                                          </div>
+                                          <div class="panel-body p-20">
+
+                                              <table class="table table-bordered">
+                                                <thead>
+                                                  <tr>
+                                                    <th>#</th>
+                                                    <th>Department</th>
+                                                    <th>Request Wise Details from Each Department</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Sales</td>
+
+                                                    <td>
+
+                                                          <a href="admin-pa.html?view=daily_sales"><button class="btn btn-default">Sales Report </button></a>
+
+                                                          <a href="admin-pa.html?view=transport"><button class="btn btn-default">Transport Exprenditure</button></a>
+
+                                                          <a href="admin-pa.html?view=site"><button class="btn btn-default">Field Report</button></a>
+
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Accounts</td>
+                                                    <td>
+                                                    <a href="admin-pa.html?view=money_requisition"><button class="btn btn-default">Money Requisition</button></a>
+                                                    <a href="admin-pa.html?view=vendor_payment"><button class="btn btn-default">Vendor Payment</button></a>
+                                                    <a href="admin-pa.html?view=bills_proc"><button class="btn btn-default">Bills & Processing</button></a>
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <th scope="row">3</th>
+                                                    <td>HR</td>
+                                                    <td>
+                                                      <a href="admin-pa.html?view=recruitment"><button class="btn btn-default">Recruitment</button></a>
+                                                      <a href="admin-pa.html?view=leave"><button class="btn btn-default">Leave</button></a>
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <th scope="row">4</th>
+                                                    <td>Commercials</td>
+                                                    <td>
+                                                      <a href="admin-pa.html?view=vendor_registeration"><button class="btn btn-default">Vendor Registeration</button></a>
+                                                      <a href="admin-pa.html?view=po_approvals"><button class="btn btn-default">PO</button></a>
+                                                      <a href="admin-pa.html?view=logistics"><button class="btn btn-default">Logistics</button></a>
+                                                      <a href="admin-pa.html?view=quotation_approval"><button class="btn btn-default">Quotation</button></a>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+
+
+                                              <!-- /.col-md-12 -->
+                                          </div>
+                                      </div>
+                                  <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
+
                               </div>
-                                <!-- /.col-md-offset-3 col-md-6 -->
+                              <!-- /.col-md-offset-3 col-md-6 -->
                             </div>
-                            <!-- /.container-fluid -->
-                          </section>
 
-                          <section class="section">
-                              <div class="container-fluid">
-                                <div class="row">
-                                  <div class="col-md-6">
-                                    <div class="panel panel-primary">
-                                      <div class="panel panel-heading">Pending Approvals from Sales</div>
-                                      <div class="panel panel-body">
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-md-6">
-                                    <div class="panel panel-danger">
-                                      <div class="panel panel-heading">Approvals Status From Sales</div>
-                                      <div class="panel panel-body">
-                                      </div>
-                                    </div>
-                                  </div>
+
+                              <div class="row">
+
+                                    <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
+                                    <div class="col-sm-10">
+                                    <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                <div class="panel-title">
+                                                    <h4 style="text-align:center">Approved Requests</h4>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body p-20">
+
+                                                <table class="table table-bordered">
+                                                  <thead>
+                                                    <tr>
+                                                      <th>#</th>
+                                                      <th>Department</th>
+                                                      <th>Request Wise Details from Each Department</th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                    <tr>
+                                                      <th scope="row">1</th>
+                                                      <td>Sales</td>
+
+                                                      <td>
+
+                                                            <a href="admin-aa.html?view=daily_sales"><button class="btn btn-default">Sales Report</button></a>
+
+                                                            <a href="admin-aa.html?view=transport"><button class="btn btn-default">Transport Exprenditure</button></a>
+
+                                                            <a href="admin-aa.html?view=site"><button class="btn btn-default">Field Report</button></a>
+
+                                                      </td>
+                                                    </tr>
+                                                    <tr>
+                                                      <th scope="row">2</th>
+                                                      <td>Accounts</td>
+                                                      <td>
+                                                      <a href="admin-aa.html?view=money_requisition"><button class="btn btn-default">Money Requisition</button></a>
+                                                      <a href="admin-aa.html?view=vendor_payment"><button class="btn btn-default">Vendor Payment</button></a>
+                                                      <a href="admin-aa.html?view=bills_proc"><button class="btn btn-default">Bills & Processing</button></a>
+                                                      </td>
+                                                    </tr>
+                                                    <tr>
+                                                      <th scope="row">3</th>
+                                                      <td>HR</td>
+                                                      <td>
+                                                        <a href="admin-aa.html?view=recruitment"><button class="btn btn-default">Recruitment</button></a>
+                                                        <a href="admin-aa.html?view=leave"><button class="btn btn-default">Leave</button></a>
+                                                      </td>
+                                                    </tr>
+                                                    <tr>
+                                                      <th scope="row">4</th>
+                                                      <td>Commercials</td>
+                                                      <td>
+                                                        <a href="admin-aa.html?view=vendor_registeration"><button class="btn btn-default">Vendor Registeration</button></a>
+                                                        <a href="admin-aa.html?view=po_approvals"><button class="btn btn-default">PO</button></a>
+                                                        <a href="admin-aa.html?view=logistics"><button class="btn btn-default">Logistics</button></a>
+                                                        <a href="admin-aa.html?view=quotation_approval"><button class="btn btn-default">Quotation</button></a>
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+
+                                              </div>
+                                                <!-- /.col-md-12 -->
+                                            </div>
+                                        </div>
+                                    <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
+
                                 </div>
-                                  <!-- /.col-md-offset-3 col-md-6 -->
-                              </div>
-                              <!-- /.container-fluid -->
-                          </section>
-
+                          </div>
+                          <!-- /.container-fluid -->
+                      </section>
                     </div>
                     <!-- /.main-page -->
 
