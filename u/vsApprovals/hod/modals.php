@@ -1,5 +1,5 @@
 <?php
-require_once 'db.php';
+require_once '../db.php';
 $pd = $_POST['rowid'];
 $type = $pd[0].$pd[1];
 $id = substr($pd, 2);

@@ -1,7 +1,7 @@
 <?php
 
-echo countpend('mr', 'hod');
-echo ountpend('vp', 'ceo');
+echo countpend('dscr', 'dir');
+
 function countpend($tab, $approver) {
   require_once 'db.php';
   switch ($tab) {
@@ -166,8 +166,8 @@ function countpend($tab, $approver) {
       echo "nope";
       break;
   }
-  $stmt = $dbcon->prepare("SELECT COUNT($approv) FROM $tab_name WHERE $approv='0'");
-  $nrows = $stmt->execute();
+  $stmt = $dbcon->query("SELECT COUNT(*) FROM $tab_name WHERE $approv='0'");
+  $nrows = $stmt->fetchColumn();
   if ($nrows > 0) {
     return $nrows;
   }
