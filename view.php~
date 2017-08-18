@@ -1,0 +1,8 @@
+<?php
+
+if($_GET['v'] == 'mr') {
+	include "temp_users/1.html";
+} elseif($_GET['v'] == 'bills'){
+	include "temp_users/2.html";
+}
+?>

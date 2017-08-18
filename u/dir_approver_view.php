@@ -109,7 +109,7 @@ function ViewPendApprov($view) {
 
               case 'site':
                 require_once 'db.php';
-                $stmt = $dbcon->prepare("SELECT * FROM sales_site WHERE site_director_approv ='FALSE' AND site_hod_approv='1'");
+                $stmt = $dbcon->prepare("SELECT * FROM sales_site WHERE site_director_approv ='0' AND site_hod_approv='1'");
                 $stmt->execute();
                 $rowCount = $stmt->fetchAll();
                 $nRows = count($rowCount);

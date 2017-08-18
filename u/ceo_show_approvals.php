@@ -27,17 +27,19 @@ switch ($type) {
               }
               if ($rowData['ceo_approv'] == TRUE) {
                 $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                $btn = '<a href="#">
-                <button type="button" class="btn btn-success pull-right" disabled>Approve</button>
-                </a>';
+                $btn = '';
+                $btn_reject = '';
               } else {
                 $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
                 $btn = '<a href="u/approv.php?id='.$rowData['mr_sl'].'&type=money_requisition&approver=ceo">
-                <button type="button" class="btn btn-success pull-right">Approve</button>
+                <i class="fa fa-check"></i>Approve</button>
+                </a>';
+                $btn_reject = '<a href="u/reject.php?id='.$rowData['mr_sl'].'&type=money_requisition&approver=ceo">
+                <i class="fa fa-ban"></i>Reject</button>
                 </a>';
               }
 
-               echo '<div class="col-sm-4">
+               echo '<div class="col-sm-3">
                  <div class="panel border-primary no-border border-3-top">
                  <div class="panel-heading">
                      <div class="panel-title">
@@ -72,16 +74,27 @@ switch ($type) {
                  </div>
              </div>
                </div>
-               <div class="col-sm-7">
+               <div class="col-sm-9">
                  <div class="panel panel-primary">
                    <div class="panel panel-body">
                      <b>Requisition Made on: </b>'.$rowData['mr_date'].' <br/>
                      <b>Made By : </b>'.$rowData['mr_made_by'].' <br/>
                      <b>Purpose : </b> '.$rowData['mr_purpose'].' <br/><br/>
                      <b style="color:red">Amount :</b> '.$rowData['mr_amount'].'<br/><br/>
-                     '.$btn.'
+                     <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fa fa-bars"></i> Actions
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
+                          <li>'.$btn.'</li>
+                          <li>'.$btn_reject.'</li>
+                          <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
+                          <li><a href="u/del.php?tab=mr&id='.$rowData['mr_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                          <li><a href=""><i class="fa fa-print"></i> Print </a></li>
 
-
+                        </ul>
+                      </div>
                    </div>
                  </div>
                </div>';
@@ -114,18 +127,20 @@ switch ($type) {
                 }
                 if ($rowData['vp_ceo_approv'] == TRUE) {
                   $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                  $btn = '<a href="#">
-                  <button type="button" class="btn btn-success pull-right" disabled>Approve</button>
-                  </a>';
+                  $btn = '';
+                  $btn_reject = '';
                 } else {
                   $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
                   $btn = '<a href="u/approv.php?id='.$rowData['vp_sl'].'&type=vendor_payment&approver=ceo">
-                  <button type="button" class="btn btn-success pull-right">Approve</button>
+                  <i class="fa fa-check"></i>Approve
+                  </a>';
+                  $btn_reject = '<a href="u/reject.php?id='.$rowData['vp_sl'].'&type=vendor_payment&approver=ceo">
+                  <i class="fa fa-ban"></i>Reject
                   </a>';
 
                 }
 
-                 echo '<div class="col-sm-4">
+                 echo '<div class="col-sm-3">
                    <div class="panel border-primary no-border border-3-top">
                    <div class="panel-heading">
                        <div class="panel-title">
@@ -160,7 +175,7 @@ switch ($type) {
                    </div>
                </div>
                  </div>
-                 <div class="col-sm-7">
+                 <div class="col-sm-9">
                    <div class="panel panel-primary">
                      <div class="panel panel-body">
                        <b>Date: </b>'.$rowData['vp_dt'].' <br/>
@@ -169,7 +184,19 @@ switch ($type) {
                        <b>Bill Ref : </b>'.$rowData['vp_billref'].' <br/><br/>
                        <b>Remarks/Note : </b> '.$rowData['vp_note'].' <br/><br/>
                        <b style="color:red">Amount :</b> '.$rowData['vp_amt'].'<br/>
-                       '.$btn.'
+                       <div class="dropdown">
+                          <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bars"></i> Actions
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
+                            <li>'.$btn.'</li>
+                            <li>'.$btn_reject.'</li>
+                            <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
+                            <li><a href="u/del.php?tab=vp&id='.$rowData['vp_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                            <li><a href=""><i class="fa fa-print"></i> Print </a></li>
+                          </ul>
+                        </div>
                      </div>
                    </div>
                  </div>';
@@ -202,17 +229,19 @@ switch ($type) {
                   }
                   if ($rowData['bl_ceo_approv'] == TRUE) {
                     $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                    $btn = '<a href="#">
-                    <button type="button" class="btn btn-success pull-right disabled">Approve</button>
-                    </a>';
+                    $btn = '';
+                    $btn_reject = '';
                   } else {
                     $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
                     $btn = '<a href="u/approv.php?id='.$rowData['bl_sl'].'&type=billing&approver=ceo">
-                    <button type="button" class="btn btn-success pull-right">Approve</button>
+                    <i class="fa fa-check"></i>Approve
+                    </a>';
+                    $btn_reject = '<a href="u/reject.php?id='.$rowData['bl_sl'].'&type=billing&approver=ceo">
+                    <i class="fa fa-ban"></i>Reject
                     </a>';
                   }
 
-                   echo '<div class="col-sm-4">
+                   echo '<div class="col-sm-3">
                      <div class="panel border-primary no-border border-3-top">
                      <div class="panel-heading">
                          <div class="panel-title">
@@ -247,7 +276,7 @@ switch ($type) {
                      </div>
                  </div>
                    </div>
-                   <div class="col-sm-7">
+                   <div class="col-sm-9">
                      <div class="panel panel-primary">
                        <div class="panel panel-body">
                          <b>Date: </b>'.$rowData['bl_dt'].' <br/>
@@ -256,7 +285,19 @@ switch ($type) {
                          <b>Site : </b>'.$rowData['bl_site'].' <br/><br/>
                          <b>Remarks/Note : </b> '.$rowData['bl_note'].' <br/><br/>
                          <b style="color:red">Amount :</b> '.$rowData['bi_amt'].'<br/><br/>
-                         '.$btn.'
+                         <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="fa fa-bars"></i> Actions
+                              <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
+                              <li>'.$btn.'</li>
+                              <li>'.$btn_reject.'</li>
+                              <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
+                              <li><a href="u/del.php?tab=bl&id='.$rowData['bl_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                              <li><a href=""><i class="fa fa-print"></i> Print </a></li>
+                            </ul>
+                          </div>
 
                        </div>
                      </div>
@@ -290,13 +331,16 @@ switch ($type) {
                     }
                     if ($rowData['dscr_ceo_approv'] == TRUE) {
                       $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                      $btn = '<a href="#">
-                      <button type="button" class="btn btn-success pull-right" disabled>Approve</button>
-                      </a>';
+                      $btn = '';
+                      $btn_reject = '';
                     } else {
                       $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
                       $btn = '<a href="u/approv.php?id='.$rowData['dscr_sl'].'&type=dscr&approver=ceo">
-                      <button type="button" class="btn btn-success pull-right">Approve</button>
+                      <i class="fa fa-check"></i>Approve
+                      </a>';
+
+                      $btn_reject = '<a href="u/reject.php?id='.$rowData['dscr_sl'].'&type=dscr&approver=ceo">
+                      <i class="fa fa-ban"></i>Reject
                       </a>';
                     }
 
@@ -342,7 +386,20 @@ switch ($type) {
                            <b>DSCR # : </b>'.$rowData['dscr_h'].' <br/><br/>
                            <b>Location : </b>'.$rowData['dscr_loc'].' <br/><br/>
                            <b>Remarks : </b>'.$rowData['dscr_rem'].' <br/><br/>
-                           '.$btn.'
+                           <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bars"></i> Actions
+                                <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
+                                <li>'.$btn.'</li>
+                                <li>'.$btn_reject.'</li>
+                                <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
+                                <li><a href="u/del.php?tab=ds&id='.$rowData['dscr_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                <li><a href=""><i class="fa fa-print"></i> Print </a></li>
+
+                              </ul>
+                            </div>
                          </div>
                        </div>
                      </div>';
@@ -376,17 +433,19 @@ switch ($type) {
                       }
                       if ($rowData['transport_ceo_approv'] == TRUE) {
                         $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                        $btn = ' <a href="#">
-                         <button type="button" class="btn btn-success pull-right" disabled>Approve</button>
-                         </a>';
+                        $btn = '';
+                        $btn_reject = '';
                       } else {
                         $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
-                        $btn = ' <a href="u/approv.php?id='.$rowData['transport_sl'].'&type=sales_transport&approver=ceo">
-                         <button type="button" class="btn btn-success pull-right">Approve</button>
+                        $btn = '<a href="u/approv.php?id='.$rowData['transport_sl'].'&type=sales_transport&approver=ceo">
+                         <i class="fa fa-check"></i>Approve
                          </a>';
+                         $btn_reject = '<a href="u/reject.php?id='.$rowData['transport_sl'].'&type=sales_transport&approver=ceo">
+                          <i class="fa fa-ban"></i>Reject
+                          </a>';
                       }
 
-                       echo '<div class="col-sm-4">
+                       echo '<div class="col-sm-3">
                          <div class="panel border-primary no-border border-3-top">
                          <div class="panel-heading">
                              <div class="panel-title">
@@ -421,14 +480,27 @@ switch ($type) {
                          </div>
                      </div>
                        </div>
-                       <div class="col-sm-7">
+                       <div class="col-sm-9">
                          <div class="panel panel-primary">
                            <div class="panel panel-body">
                              <b>Bill Date: </b>'.$rowData['transport_dt'].' <br/>
                              <b>Expenditure Bill # : </b>'.$rowData['transport_h'].' <br/><br/>
 
                              <b>Remarks : </b>'.$rowData['transport_rem'].' <br/><br/>
-                            '.$btn.'
+                             <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i class="fa fa-bars"></i> Actions
+                                  <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
+                                  <li>'.$btn.'</li>
+                                  <li>'.$btn_reject.'</li>
+                                  <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
+                                  <li><a href="u/del.php?tab=te&id='.$rowData['transport_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                  <li><a href=""><i class="fa fa-print"></i> Print </a></li>
+
+                                </ul>
+                              </div>
 
                            </div>
                          </div>
@@ -461,13 +533,14 @@ switch ($type) {
                         }
                         if ($rowData['site_ceo_approv'] == TRUE) {
                           $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                          $btn = '<a href="#">
-                          <button type="button" class="btn btn-success pull-right" disabled>Approve</button>
-                          </a>';
+                          $btn = '';
                         } else {
                           $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
                           $btn = '<a href="u/approv.php?id='.$rowData['site_sl'].'&type=site_report&approver=ceo">
-                          <button type="button" class="btn btn-success pull-right">Approve</button>
+                          <i class="fa fa-check"></i>Approve
+                          </a>';
+                          $btn_reject = '<a href="u/reject.php?id='.$rowData['site_sl'].'&type=site_report&approver=ceo">
+                          <i class="fa fa-ban"></i>Reject
                           </a>';
                         }
 
@@ -515,8 +588,20 @@ switch ($type) {
                                <b>Location : </b>'.$rowData['site_loc'].' <br/>
                                <b>Client : </b>'.$rowData['site_client'].' <br/><br/>
                                <b>Remarks : </b>'.$rowData['site_rem'].'<br/><br/>
-                               '.$btn.'
+                               <div class="dropdown">
+                                  <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-bars"></i> Actions
+                                    <span class="caret"></span>
+                                  </button>
+                                  <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
+                                    <li>'.$btn.'</li>
+                                    <li>'.$btn_reject.'</li>
+                                    <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
+                                    <li><a href="u/del.php?tab=st&id='.$rowData['site_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                    <li><a href=""><i class="fa fa-print"></i> Print </a></li>
 
+                                  </ul>
+                                </div>
                              </div>
                            </div>
                          </div>';
@@ -549,17 +634,19 @@ switch ($type) {
                       }
                       if ($rowData['rec_ceo_approv'] == TRUE) {
                         $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                        $btn = '<a href="#">
-                        <button type="button" class="btn btn-success pull-right" disabled>Approve</button>
-                        </a>';
+                        $btn = '';
+                        $btn_reject= '';
                       } else {
                         $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
                         $btn = '<a href="u/approv.php?id='.$rowData['rec_sl'].'&type=recruitment&approver=ceo">
-                        <button type="button" class="btn btn-success pull-right">Approve</button>
+                        <i class="fa fa-check"></i>Approve
+                        </a>';
+                        $btn_reject = '<a href="u/reject.php?id='.$rowData['rec_sl'].'&type=recruitment&approver=ceo">
+                        <i class="fa fa-ban"></i>Reject
                         </a>';
                       }
 
-                       echo '<div class="col-sm-4">
+                       echo '<div class="col-sm-3">
                          <div class="panel border-primary no-border border-3-top">
                          <div class="panel-heading">
                              <div class="panel-title">
@@ -594,7 +681,7 @@ switch ($type) {
                          </div>
                      </div>
                        </div>
-                       <div class="col-sm-7">
+                       <div class="col-sm-9">
                          <div class="panel panel-primary">
                            <div class="panel panel-body">
                              <b>Date: </b>'.$rowData['rec_dt'].' <br/>
@@ -604,7 +691,20 @@ switch ($type) {
                              <br/>
                              <b>Remarks : </b>'.$rowData['rec_rem'].'
                              <br/><br/>
-                             '.$btn.'
+                             <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i class="fa fa-bars"></i> Actions
+                                  <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
+                                  <li>'.$btn.'</li>
+                                  <li>'.$btn_reject.'</li>
+                                  <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
+                                  <li><a href="u/del.php?tab=re&id='.$rowData['rec_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                  <li><a href=""><i class="fa fa-print"></i> Print </a></li>
+
+                                </ul>
+                              </div>
                            </div>
                          </div>
                        </div>';
@@ -636,17 +736,19 @@ switch ($type) {
                         }
                         if ($rowData['lev_ceo_approv'] == TRUE) {
                           $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                          $btn = '<a href="#">
-                                  <button type="button" class="btn btn-success pull-right" disabled>Approve</button>
-                                  </a>';
+                          $btn = '';
+                          $btn_reject = '';
                         } else {
                           $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
                           $btn = '<a href="u/approv.php?id='.$rowData['lev_sl'].'&type=leave&approver=ceo">
-                           <button type="button" class="btn btn-success pull-right">Approve</button>
+                           <i class="fa fa-check"></i>Approve
                            </a>';
+                         $btn_reject = '<a href="u/reject.php?id='.$rowData['lev_sl'].'&type=leave&approver=ceo">
+                          <i class="fa fa-ban">Reject
+                          </a>';
                         }
 
-                         echo '<div class="col-sm-4">
+                         echo '<div class="col-sm-3">
                            <div class="panel border-primary no-border border-3-top">
                            <div class="panel-heading">
                                <div class="panel-title">
@@ -681,7 +783,7 @@ switch ($type) {
                            </div>
                        </div>
                          </div>
-                         <div class="col-sm-7">
+                         <div class="col-sm-9">
                            <div class="panel panel-primary">
                              <div class="panel panel-body">
                                <b>Date: </b>'.$rowData['lev_dt'].' <br/>
@@ -690,8 +792,20 @@ switch ($type) {
                                <b>No of Days : </b>'.$rowData['lev_no'].' <br/>
                                <br/>
                                <b>Remarks/Details : </b>'.$rowData['lev_rem'].'<br/><br/>
-                               '.$btn.'
+                               <div class="dropdown">
+                                  <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-bars"></i> Actions
+                                    <span class="caret"></span>
+                                  </button>
+                                  <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
+                                    <li>'.$btn.'</li>
+                                    <li>'.$btn_reject.'</li>
+                                    <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
+                                    <li><a href="u/del.php?tab=le&id='.$rowData['lev_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                    <li><a href=""><i class="fa fa-print"></i> Print </a></li>
 
+                                  </ul>
+                                </div>
                              </div>
                            </div>
                          </div>';
@@ -723,17 +837,19 @@ switch ($type) {
                           }
                           if ($rowData['ven_ceo_approv'] == TRUE) {
                             $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                            $btn = '<a href="#">
-                            <button type="button" class="btn btn-success pull-right" disabled>Approve</button>
-                            </a>';
+                            $btn = '';
+                            $btn_reject = '';
                           } else {
                             $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
                             $btn = '<a href="u/approv.php?id='.$rowData['ven_sl'].'&type=vendor_registeration&approver=ceo">
-                            <button type="button" class="btn btn-success pull-right">Approve</button>
+                            <i class="fa fa-check"></i>Approve
+                            </a>';
+                            $btn_reject = '<a href="u/reject.php?id='.$rowData['ven_sl'].'&type=vendor_registeration&approver=ceo">
+                            <i class="fa fa-ban"></i>Reject
                             </a>';
                           }
 
-                           echo '<div class="col-sm-4">
+                           echo '<div class="col-sm-3">
                              <div class="panel border-primary no-border border-3-top">
                              <div class="panel-heading">
                                  <div class="panel-title">
@@ -768,7 +884,7 @@ switch ($type) {
                              </div>
                          </div>
                            </div>
-                           <div class="col-sm-7">
+                           <div class="col-sm-9">
                              <div class="panel panel-primary">
                                <div class="panel panel-body">
                                  <b>Date: </b>'.$rowData['ven_dt'].' <br/>
@@ -778,9 +894,20 @@ switch ($type) {
                                  <br/>
                                  <b>Remarks/Details : </b>'.$rowData['ven_rem'].'
                                  <br><br>
-                                 '.$btn.'
+                                 <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <i class="fa fa-bars"></i> Actions
+                                      <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
+                                      <li>'.$btn.'</li>
+                                      <li>'.$btn_reject.'</li>
+                                      <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
+                                      <li><a href="u/del.php?tab=vr&id='.$rowData['ven_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                      <li><a href=""><i class="fa fa-print"></i> Print </a></li>
 
-
+                                    </ul>
+                                  </div>
                                </div>
                              </div>
                            </div>';
@@ -812,17 +939,19 @@ switch ($type) {
                             }
                             if ($rowData['po_ceo_approv'] == TRUE) {
                               $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                              $btn = '<a href="#">
-                              <button type="button" class="btn btn-success pull-right" disabled>Approve</button>
-                              </a>';
+                              $btn = '';
+                              $btn_reject = '';
                             } else {
                               $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
                               $btn = '<a href="u/approv.php?id='.$rowData['po_sl'].'&type=po_approval&approver=ceo">
-                              <button type="button" class="btn btn-success pull-right">Approve</button>
+                              <i class="fa fa-check"></i>Approve
+                              </a>';
+                              $btn_reject = '<a href="u/reject.php?id='.$rowData['po_sl'].'&type=po_approval&approver=ceo">
+                              <i class="fa fa-ban"></i>Reject
                               </a>';
                             }
 
-                             echo '<div class="col-sm-4">
+                             echo '<div class="col-sm-3">
                                <div class="panel border-primary no-border border-3-top">
                                <div class="panel-heading">
                                    <div class="panel-title">
@@ -857,7 +986,7 @@ switch ($type) {
                                </div>
                            </div>
                              </div>
-                             <div class="col-sm-7">
+                             <div class="col-sm-9">
                                <div class="panel panel-primary">
                                  <div class="panel panel-body">
                                    <b>PO Date: </b>'.$rowData['po_dt'].' <br/>
@@ -867,8 +996,20 @@ switch ($type) {
                                    <b>Vendor Details : </b>'.$rowData['po_det'].' <br/>
                                    <br/>
                                    <b>Remarks/Details : </b>'.$rowData['po_rem'].' <br/><br/>
-                                   '.$btn.'
+                                   <div class="dropdown">
+                                      <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-bars"></i> Actions
+                                        <span class="caret"></span>
+                                      </button>
+                                      <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
+                                        <li>'.$btn.'</li>
+                                        <li>'.$btn_reject.'</li>
+                                        <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
+                                        <li><a href="u/del.php?tab=po&id='.$rowData['po_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                        <li><a href=""><i class="fa fa-print"></i> Print </a></li>
 
+                                      </ul>
+                                    </div>
                                  </div>
                                </div>
                              </div>';
@@ -901,13 +1042,15 @@ switch ($type) {
                               }
                               if ($rowData['trans_ceo_approv'] == TRUE) {
                                 $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                                $btn = '<a href="#">
-                                <button type="button" class="btn btn-success pull-right" disabled>Approve</button>
-                                </a>';
+                                $btn = '';
+                                $btn_reject = '';
                               } else {
                                 $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
                                 $btn = '<a href="u/approv.php?id='.$rowData['trans_sl'].'&type=logistics&approver=ceo">
-                                <button type="button" class="btn btn-success pull-right">Approve</button>
+                                <i class="fa fa-check"></i>Approve
+                                </a>';
+                                $btn_reject = '<a href="u/reject.php?id='.$rowData['trans_sl'].'&type=logistics&approver=ceo">
+                                <i class="fa fa-ban"></i>Reject
                                 </a>';
                               }
 
@@ -954,7 +1097,20 @@ switch ($type) {
                                      <b>Tranporter Details : </b>'.$rowData['trans_det'].' <br/><br/>
 
                                      <b>Remarks/Details : </b>'.$rowData['trans_rem'].'<br><br>
-                                     '.$btn.'
+                                     <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          <i class="fa fa-bars"></i> Actions
+                                          <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
+                                          <li>'.$btn.'</li>
+                                          <li>'.$btn_reject.'</li>
+                                          <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
+                                          <li><a href="u/del.php?tab=lo&id='.$rowData['trans_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                          <li><a href=""><i class="fa fa-print"></i> Print </a></li>
+
+                                        </ul>
+                                      </div>
                                    </div>
                                  </div>
                                </div>';
@@ -988,14 +1144,16 @@ switch ($type) {
                                 }
                                 if ($rowData['quotation_ceo_approv'] == TRUE) {
                                   $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                                  $btn = ' <a href="#">
-                                   <button type="button" class="btn btn-success pull-right" disabled>Approve</button>
-                                   </a>';
+                                  $btn = '';
+                                  $btn_reject = '';
                                 } else {
                                   $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
-                                  $btn = ' <a href="u/approv.php?id='.$rowData['quotation_sl'].'&type=quotation&approver=ceo">
-                                   <button type="button" class="btn btn-success pull-right">Approve</button>
+                                  $btn = '<a href="u/approv.php?id='.$rowData['quotation_sl'].'&type=quotation&approver=ceo">
+                                   <i class="fa fa-check"></i>Approve
                                    </a>';
+                                   $btn_reject = '<a href="u/reject.php?id='.$rowData['quotation_sl'].'&type=quotation&approver=ceo">
+                                    <i class="fa fa-ban"></i>Reject
+                                    </a>';
                                 }
 
                                  echo '<div class="col-sm-4">
@@ -1041,10 +1199,20 @@ switch ($type) {
                                        <b>Client Details : </b>'.$rowData['quotation_det'].' <br/><br/>
 
                                        <b>Remarks/Details : </b>'.$rowData['quotation_rem'].'<br><br>
-                                      '.$btn.'
+                                       <div class="dropdown">
+                                          <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-bars"></i> Actions
+                                            <span class="caret"></span>
+                                          </button>
+                                          <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
+                                            <li>'.$btn.'</li>
+                                            <li>'.$btn_reject.'</li>
+                                            <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
+                                            <li><a href="u/del.php?tab=qo&id='.$rowData['quotation_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                            <li><a href=""><i class="fa fa-print"></i> Print </a></li>
 
-
-
+                                          </ul>
+                                        </div>
                                      </div>
                                    </div>
                                  </div>';
