@@ -73,7 +73,7 @@ public function MoneyRequisition($id, $approver)
 {
   include 'db.php';
   if ($approver == 'hod') {
-    if ($_SESSION['access'] == 1 or $_SESSION['access'] == 5) {
+
       $stmt = "UPDATE mr SET hod_approv='1' WHERE mr_sl='$id'";
       if ($dbcon->exec($stmt)) {
         header("Location: ../hod-pa.html?view=money_requisition&update=approved");
@@ -81,27 +81,27 @@ public function MoneyRequisition($id, $approver)
         header("Location: ../hod-pa.html?view=money_requisition&update=notallowed");
       }
 
-    }
+
   }
   elseif ($approver == 'dir') {
-    if ($_SESSION['access'] == 1 or $_SESSION['access'] == 7) {
+
       $stmt = "UPDATE mr SET direct_approv='1' WHERE mr_sl='$id'";
       if ($dbcon->exec($stmt)) {
         header("Location: ../dir-pa.html?view=money_requisition&update=approved");
       } else {
         header("Location: ../dir-pa.html?view=money_requisition&update=notallowed");
       }
-    }
+
   }
   elseif ($approver == 'ceo') {
-    if ($_SESSION['access'] == 1) {
+
       $stmt = "UPDATE mr SET ceo_approv='1' WHERE mr_sl='$id'";
       if ($dbcon->exec($stmt)) {
         header("Location: ../admin-pa.html?view=money_requisition&update=approved");
       } else {
         header("Location: ../admin-pa.html?view=money_requisition&update=notallowed");
       }
-    }
+
   }
 
 
@@ -111,14 +111,14 @@ public function VendorPayment($id, $approver)
 {
   include 'db.php';
   if ($approver == 'hod') {
-    if ($_SESSION['access'] == 1 or $_SESSION['access'] == 6) {
+
       $stmt = "UPDATE accounts_vp SET vp_hod_approv='1' WHERE vp_sl='$id'";
       if ($dbcon->exec($stmt)) {
         header("Location: ../hod-pa.html?view=vendor_payment&update=approved");
       } else {
         header("Location: ../hod-pa.html?view=vendor_payment&update=notallowed");
       }
-    }
+    
   }
   elseif ($approver == 'dir') {
     if ($_SESSION['access'] == 1 or $_SESSION['access'] == 7) {

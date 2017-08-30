@@ -16,7 +16,7 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 2) {
 
         <!-- ========== COMMON STYLES ========== -->
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
-        <link rel="stylesheet" href="css/font-awesome.min.css" media="screen" >
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" >
         <link rel="stylesheet" href="css/animate-css/animate.min.css" media="screen" >
         <link rel="stylesheet" href="css/lobipanel/lobipanel.min.css" media="screen" >
 
@@ -63,9 +63,13 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 2) {
 
                 			<ul class="nav navbar-nav navbar-right" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
 
-                        <li>
-                          <a href="home.php" class="dropdown-toggle bg-danger" role="button"><i class="fa fa-home"></i> Back To Admin Home</a>
-                        </li>
+                        <?php
+                          if ($_SESSION['access']==1) {
+                            echo '<li>
+                              <a href="home.php" class="dropdown-toggle bg-danger" role="button"><i class="fa fa-home"></i> Back To Admin Home</a>
+                            </li>';
+                          }
+                        ?>
                         <li>
                 				<a href="u/logout.php?logout=1" class="dropdown-toggle bg-primary" role="button"><i class="fa fa-sign-out"></i> Logout</a>
                 				</li>
@@ -108,6 +112,7 @@ if ($_SESSION['access'] == 1 or $_SESSION['access'] == 2) {
                         <!-- /.sidebar-content -->
                     </div>
                     <!-- /.left-sidebar -->
+
 
                     <div class="main-page">
 

@@ -23,9 +23,11 @@ switch ($_SESSION['access']) {
 
   case '6':
     include 'hod.html';
+    break;
 
   case '7':
     include 'dir.html';
+    break;
 
   default:
     header("Location: index.html");

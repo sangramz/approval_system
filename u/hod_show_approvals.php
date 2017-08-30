@@ -11,28 +11,53 @@ switch ($type) {
       $stmt->execute();
       $rowCount = $stmt->fetchAll();
       $nRows = count($rowCount);
+      $url = "../hod.html";
           if ($nRows = 1) {
             foreach ($rowCount as $rowData) {
-              if ($rowData['hod_approv'] == TRUE) {
-                $hod_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                $btn = '';
-                $btn_reject = '';
-              } else {
-                $hod_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
-                $btn = '<a href="u/approv.php?id='.$rowData['mr_sl'].'&type=money_requisition&approver=hod">
-                <i class="fa fa-check"></i>Approve
-                </a>';
-                $btn_reject = '<a href="u/actions/reject/reject.php?type=money_requisition&id='.$rowData['mr_sl'].'"><i class="fa fa-ban"></i> Reject </a>';
+
+              if ($rowData['mr_reject'] == 'Rejected by HOD' OR $rowData['mr_reject'] == 'Rejected by CEO' OR $rowData['mr_reject'] == 'Rejected by Director') {
+
+                $action = '<div class="alert alert-danger" role="alert"> <strong>APPROVAL REJECTED!</strong>This approval has been '. $rowData['mr_reject'] .' </div><br>
+                <a class="btn btn-danger" href="u/del.php?type=money_requisition&id='.$rowData['mr_sl'].'">Delete It !</a>';
+
               }
-              if ($rowData['direct_approv'] == TRUE) {
-                $direct_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-              } else {
-                $direct_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
-              }
-              if ($rowData['ceo_approv'] == TRUE) {
-                $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-              } else {
-                $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
+
+              else {
+                    if ($rowData['hod_approv'] == TRUE) {
+                      $hod_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
+                      $btn = '';
+                      $btn_reject = '';
+                    } else {
+                      $hod_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
+                      $btn = '<a href="u/approv.php?id='.$rowData['mr_sl'].'&type=money_requisition&approver=hod">
+                      <i class="fa fa-check"></i>Approve
+                      </a>';
+                      $btn_reject = '<a href="u/reject.php?approver=hod&type=money_requisition&id='.$rowData['mr_sl'].'"><i class="fa fa-ban"></i> Reject </a>';
+                    }
+                    if ($rowData['direct_approv'] == TRUE) {
+                      $direct_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
+                    } else {
+                      $direct_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
+                    }
+                    if ($rowData['ceo_approv'] == TRUE) {
+                      $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
+                    } else {
+                      $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
+                    }
+                    $action = '<div class="dropdown">
+                       <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         <i class="fa fa-bars"></i> Actions
+                         <span class="caret"></span>
+                       </button>
+                       <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
+                         <li>'.$btn.'</li>
+                         <li>'.$btn_reject.'</li>
+                         <li><a href="" data-toggle="modal" data-target="#ed" id="bt_va" data-id="mr'.$rowData['mr_sl'].'"><i class="fa fa-edit"></i> Edit </a></li>
+                         <li><a href="u/del.php?type=money_requisition&id='.$rowData['mr_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                         <li><a href=""><i class="fa fa-print"></i> Print </a></li>
+
+                       </ul>
+                     </div>';
               }
 
                echo '<div class="col-sm-3">
@@ -77,20 +102,7 @@ switch ($type) {
                      <b>Made By : </b>'.$rowData['mr_made_by'].' <br/>
                      <b>Purpose : </b> '.$rowData['mr_purpose'].' <br/><br/>
                      <b style="color:red">Amount :</b> '.$rowData['mr_amount'].'<br/><br/><hr style="color:black">
-                     <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-bars"></i> Actions
-                          <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
-                          <li>'.$btn.'</li>
-                          <li>'.$btn_reject.'</li>
-                          <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
-                          <li><a href="u/del.php?tab=mr&id='.$rowData['mr_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
-                          <li><a href=""><i class="fa fa-print"></i> Print </a></li>
-
-                        </ul>
-                      </div>
+                     '.$action.'
 
                    </div>
 
@@ -110,27 +122,47 @@ switch ($type) {
         $nRows = count($rowCount);
             if ($nRows = 1) {
               foreach ($rowCount as $rowData) {
-                if ($rowData['vp_hod_approv'] == TRUE) {
-                  $hod_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                  $btn = '';
-                  $btn_reject = '';
 
+                if ($rowData['vp_reject'] == 'Rejected by HOD' OR $rowData['vp_reject'] == 'Rejected by CEO' OR $rowData['vp_reject'] == 'Rejected by Director') {
+                  $action = '<div class="alert alert-danger" role="alert"> <strong>APPROVAL REJECTED!</strong>This approval has been '. $rowData['vp_reject'] .' </div><br>
+                  <a class="btn btn-danger" href="u/del.php?type=vendor_payment&id='.$rowData['vp_sl'].'">Delete It !</a>';
                 } else {
-                  $hod_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
-                  $btn = '<a href="u/approv.php?id='.$rowData['vp_sl'].'&type=vendor_payment&approver=hod">
-                  <i class="fa fa-check"></i>Approve
-                  </a>';
-                  $btn_reject = '<a href="u/reject.php?tab=vp&id='.$rowData['vp_sl'].'&approver=hod"><i class="fa fa-ban"></i> Reject </a>';
-                }
-                if ($rowData['vp_director_approv'] == TRUE) {
-                  $direct_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                } else {
-                  $direct_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
-                }
-                if ($rowData['vp_ceo_approv'] == TRUE) {
-                  $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
-                } else {
-                  $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
+                          if ($rowData['vp_hod_approv'] == TRUE) {
+                            $hod_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
+                            $btn = '';
+                            $btn_reject = '';
+
+                          } else {
+                            $hod_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
+                            $btn = '<a href="u/approv.php?id='.$rowData['vp_sl'].'&type=vendor_payment&approver=hod">
+                            <i class="fa fa-check"></i>Approve
+                            </a>';
+                            $btn_reject = '<a href="u/reject.php?approver=hod&type=vendor_payment&id='.$rowData['vp_sl'].'"><i class="fa fa-ban"></i> Reject </a>';
+                          }
+                          if ($rowData['vp_director_approv'] == TRUE) {
+                            $direct_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
+                          } else {
+                            $direct_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
+                          }
+                          if ($rowData['vp_ceo_approv'] == TRUE) {
+                            $ceo_approv = '<small class="color-success"><i class="fa fa-check"></i> Approved</small>';
+                          } else {
+                            $ceo_approv= '<small class="color-danger"><i class="fa fa-times"></i> Pending</small>';
+                          }
+                          $action = '<div class="dropdown">
+                             <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               <i class="fa fa-bars"></i> Actions
+                               <span class="caret"></span>
+                             </button>
+                             <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
+                               <li>'.$btn.'</li>
+                               <li>'.$btn_reject.'</li>
+                               <li><a href="" data-toggle="modal" data-target="#ed" id="bt_va" data-id="vp'.$rowData['vp_sl'].'"><i class="fa fa-edit"></i> Edit </a></li>
+                               <li><a href="u/del.php?type=vendor_payment&id='.$rowData['vp_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                               <li><a href=""><i class="fa fa-print"></i> Print </a></li>
+
+                             </ul>
+                           </div>';
                 }
 
                  echo '<div class="col-sm-3">
@@ -177,19 +209,7 @@ switch ($type) {
                        <b>Bill Ref : </b>'.$rowData['vp_billref'].' <br/><br/>
                        <b>Remarks/Note : </b> '.$rowData['vp_note'].' <br/><br/>
                        <b style="color:red">Amount :</b> '.$rowData['vp_amt'].'<br/>
-                       <div class="dropdown">
-                          <button class="btn btn-primary dropdown-toggle" type="button" id="menu10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-bars"></i> Actions
-                            <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
-                            <li>'.$btn.'</li>
-                            <li>'.$btn_reject.'</li>
-                            <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
-                            <li><a href="u/del.php?tab=vp&id='.$rowData['vp_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
-                            <li><a href=""><i class="fa fa-print"></i> Print </a></li>
-                          </ul>
-                        </div>
+                       '.$action.'
                      </div>
                    </div>
                  </div>';
@@ -282,8 +302,8 @@ switch ($type) {
                             <ul class="dropdown-menu bg-danger" aria-labelledby="menu10">
                               <li>'.$btn.'</li>
                               <li>'.$btn_reject.'</li>
-                              <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
-                              <li><a href="u/del.php?tab=bl&id='.$rowData['bl_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                              <li><a href="" data-toggle="modal" data-target="#ed" id="bt_va" data-id="bl'.$rowData['bl_sl'].'"><i class="fa fa-edit"></i> Edit </a></li>
+                              <li><a href="u/del.php?type=billing&id='.$rowData['bl_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
                               <li><a href=""><i class="fa fa-print"></i> Print </a></li>
                             </ul>
                           </div>
@@ -378,7 +398,7 @@ switch ($type) {
                                 <li>'.$btn.'</li>
                                 <li>'.$btn_reject.'</li>
                                 <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
-                                <li><a href="u/del.php?tab=ds&id='.$rowData['dscr_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                <li><a href="u/del.php?type=dscr&id='.$rowData['dscr_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
                                 <li><a href=""><i class="fa fa-print"></i> Print </a></li>
                               </ul>
                             </div>
@@ -474,7 +494,7 @@ switch ($type) {
                                   <li>'.$btn.'</li>
                                   <li>'.$btn_reject.'</li>
                                   <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
-                                  <li><a href="u/del.php?tab=te&id='.$rowData['transport_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                  <li><a href="u/del.php?type=sales_transport&id='.$rowData['transport_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
                                   <li><a href=""><i class="fa fa-print"></i> Print </a></li>
                                 </ul>
                               </div>
@@ -571,7 +591,7 @@ switch ($type) {
                                     <li>'.$btn.'</li>
                                     <li>'.$btn_reject.'</li>
                                     <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
-                                    <li><a href="u/del.php?tab=st&id='.$rowData['site_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                    <li><a href="u/del.php?type=site_report&id='.$rowData['site_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
                                     <li><a href=""><i class="fa fa-print"></i> Print </a></li>
                                   </ul>
                                 </div>
@@ -668,7 +688,7 @@ switch ($type) {
                                   <li>'.$btn.'</li>
                                   <li>'.$btn_reject.'</li>
                                   <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
-                                  <li><a href="u/del.php?tab=re&id='.$rowData['rec_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                  <li><a href="u/del.php?type=recruitment&id='.$rowData['rec_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
                                   <li><a href=""><i class="fa fa-print"></i> Print </a></li>
                                 </ul>
                               </div>
@@ -764,7 +784,7 @@ switch ($type) {
                                     <li>'.$btn.'</li>
                                     <li>'.$btn_reject.'</li>
                                     <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
-                                    <li><a href="u/del.php?tab=le&id='.$rowData['lev_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                    <li><a href="u/del.php?type=leave&id='.$rowData['lev_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
                                     <li><a href=""><i class="fa fa-print"></i> Print </a></li>
                                   </ul>
                                 </div>
@@ -863,7 +883,7 @@ switch ($type) {
                                       <li>'.$btn.'</li>
                                       <li>'.$btn_reject.'</li>
                                       <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
-                                      <li><a href="u/del.php?tab=vr&id='.$rowData['ven_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                      <li><a href="u/del.php?type=vendor_registeration&id='.$rowData['ven_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
                                       <li><a href=""><i class="fa fa-print"></i> Print </a></li>
                                     </ul>
                                   </div>
@@ -962,7 +982,7 @@ switch ($type) {
                                         <li>'.$btn.'</li>
                                         <li>'.$btn_reject.'</li>
                                         <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
-                                        <li><a href="u/del.php?tab=po&id='.$rowData['po_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                        <li><a href="u/del.php?type=po_approval&id='.$rowData['po_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
                                         <li><a href=""><i class="fa fa-print"></i> Print </a></li>
                                       </ul>
                                     </div>
@@ -1059,7 +1079,7 @@ switch ($type) {
                                           <li>'.$btn.'</li>
                                           <li>'.$btn_reject.'</li>
                                           <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
-                                          <li><a href="u/del.php?tab=lo&id='.$rowData['trans_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                          <li><a href="u/del.php?type=logistics&id='.$rowData['trans_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
                                           <li><a href=""><i class="fa fa-print"></i> Print </a></li>
                                         </ul>
                                       </div>
@@ -1157,7 +1177,7 @@ switch ($type) {
                                             <li>'.$btn.'</li>
                                             <li>'.$btn_reject.'</li>
                                             <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
-                                            <li><a href="u/del.php?tab=lo&id='.$rowData['quotation_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
+                                            <li><a href="u/del.php?type=quotation&id='.$rowData['quotation_sl'].'"><i class="fa fa-minus-square"></i> Delete</a></li>
                                             <li><a href=""><i class="fa fa-print"></i> Print </a></li>
                                           </ul>
                                         </div>

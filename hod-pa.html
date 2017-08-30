@@ -16,7 +16,7 @@ else {
 
         <!-- ========== COMMON STYLES ========== -->
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
-        <link rel="stylesheet" href="css/font-awesome.min.css" media="screen" >
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" >
         <link rel="stylesheet" href="css/animate-css/animate.min.css" media="screen" >
         <link rel="stylesheet" href="css/lobipanel/lobipanel.min.css" media="screen" >
 
@@ -157,6 +157,28 @@ else {
                               </div>
                             </div>
 
+                            <div id="ed" class="modal fade" role="dialog">
+                              <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Edit</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <div class="res1">
+                                    </div>
+
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"></button>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+
 
                             <div class="col-md-12">
                             </div>
@@ -209,6 +231,23 @@ else {
                   data :  {rowid: rowid}, //Pass $id
                   success : function(data){
                   $('.res').html(data);//Show fetched data from database
+                  }
+              });
+           });
+        });
+        </script>
+
+        <script>
+
+        $(document).ready(function(){
+          $('#ed').on('show.bs.modal', function (e) {
+              var rowid = $(e.relatedTarget).data('id');
+              $.ajax({
+                  type : 'post',
+                  url : 'u/show_edit.php', //Here you will fetch records
+                  data :  {rowid: rowid}, //Pass $id
+                  success : function(data){
+                  $('.res1').html(data);//Show fetched data from database
                   }
               });
            });

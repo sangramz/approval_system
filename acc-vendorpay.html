@@ -1,7 +1,10 @@
 <?php
 session_start();
-if ($_SESSION['access']!== 1 or $_SESSION['access'] == 2) {
-header('Location: index.html');
+if ($_SESSION['access'] == 1 or $_SESSION['access'] == 2) {
+
+}
+else {
+  header('Location: index.html');
 }
 ?>
 <!DOCTYPE html>
@@ -14,7 +17,7 @@ header('Location: index.html');
 
         <!-- ========== COMMON STYLES ========== -->
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
-        <link rel="stylesheet" href="css/font-awesome.min.css" media="screen" >
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" >
         <link rel="stylesheet" href="css/animate-css/animate.min.css" media="screen" >
         <link rel="stylesheet" href="css/lobipanel/lobipanel.min.css" media="screen" >
 
